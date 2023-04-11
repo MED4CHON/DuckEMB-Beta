@@ -1,0 +1,173 @@
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+    height: 100%!important;
+}
+
+body {
+    display: flex;
+    background-color: #EEF2F5!important;
+}
+
+/* Globales */
+.centrar {
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+}
+
+.ico-blanco {
+    filter: brightness(100);
+}
+
+.enlace-nav {
+    color: #828282!important;
+}
+
+
+
+/* Padding */
+.ps-10 {padding-left: 10px;}
+.ps-20 {padding-left: 20px;}
+.ps-30 {padding-left: 30px;}
+.ps-40 {padding-left: 40px;}
+
+.pe-8 {padding-right: 8px;}
+.pe-10 {padding-right: 10px;}
+.pe-20 {padding-right: 20px;}
+
+
+
+/* Sidebar */
+.sidebar {
+    background-color: #FFFFFF!important;
+    width: 380px;
+    height: 100%!important;
+    box-shadow: 10px 0px 5000px 80px rgba(0, 0, 0, .05);
+}
+
+.nombre-usuario {
+    font-size: 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    color: darkblue;
+}
+
+.mail-usuario {
+    font-size: 12px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+    color:#666666;
+    font-style: italic;
+}
+
+.boton-activo-sidebar {
+    background-color: #FF8A00;
+    color: #FFFFFF;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.boton-inactivo-sidebar {
+    color: #828282!important;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.boton-salir {
+    position: absolute;
+    bottom: 15px!important;
+    background-color: #FFE7E3!important;
+    color: #FF5B3F!important;
+    border-radius: 10px!important;
+    width: 100px;
+}
+
+.copyright {
+    position: absolute;
+    font-size: 12px;
+    bottom: 0px!important;
+    color: #D2D2D2;
+}
+
+
+
+/* Header */
+header {
+    z-index: -1;
+    height: 80px;
+    background-color: #FFFFFF;
+    width: 100%;
+    box-shadow: 10px 10px 1000px 80px rgba(0, 0, 0, .05);
+}
+
+.titulo-pagina {
+    font-family: 'Montserrat', sans-serif;
+    color: #666666;
+    font-size: 32px;
+}
+
+.dia, .fecha-mes {
+    color: #3D3D3D;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+}
+
+/* .notificacion {
+    z-index: 1;
+} */
+
+/* .circulo {
+    z-index: 2;
+    background-color: #FF5146;
+    width: 20px;
+    height: 20px;
+} */
+
+
+
+/* Info Ventas */
+.info-venta {
+    border-radius: 18px;
+    background-color: #ccd7df;
+}
+
+.row {
+    gap: 15px!important;
+}
+
+.titulo-venta {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bold;
+}
+
+.subtitulo-venta {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #B1B1B1;
+}
+
+.porcentaje-suba {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #02B636;
+}
+
+.valor-venta h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
+
+img {
+    width: 40px;
+    height: 40px;
+}
+
+.icon-menu {
+    height: 20px;
+    width: 20px;
+}

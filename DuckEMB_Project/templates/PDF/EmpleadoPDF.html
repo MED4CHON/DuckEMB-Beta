@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Empleados</title>
+
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 30pt; width: 540pt; top: 50pt; height: 40pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 30pt; width: 540pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 30pt; width: 540pt; top: 772pt; height: 40pt;
+            }
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #96D4D4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #footer_content {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+        <h1>Listado de Empleados <br> (Actualizado hasta el: {{horario}})</h1>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">
+        Disclaimer: Los datos que se detallan a continuación solo pueden ser obtenido si el usuario cuentas con los permisos correspondientes.
+    </div>
+
+    <!-- HTML Content -->
+    <table style="width:100%">
+        <thead>
+            <tr style="height:30px">
+                <th style="width:8%">D.N.I.</th>
+                <th style="width:15%">Nombre</th>
+                <th style="width:15%">Teléfono</th>
+                <th style="width:30%">Email</th>
+                <th style="width:9%">Rol</th>
+                <th style="width:26%">Dirección</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in empleado %}
+            <tr style="height:40px">
+                <td>{{ emp.dni }}</td>
+                <td>{{ emp.nombre }}</td>
+                <td>{{ emp.telefono }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.rol }}</td>
+                {% for dir in direccion %}
+                    {% if dir.idEmpleado == emp %}
+                        <td>{{ dir.calle }}, B° {{ dir.barrio }}, {{ dir.ciudad }} ({{ dir.cp }}), {{ dir.provincia }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

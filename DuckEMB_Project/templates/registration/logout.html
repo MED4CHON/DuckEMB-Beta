@@ -1,0 +1,39 @@
+{% load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'logout.css' %}">
+    <title>DuckEMB v.0.4.13</title>
+</head>
+<body>
+    <header class="bg_animate">
+        <div class="container">
+            <div id="registrarse">
+                <img id="image" src="{% static '/Iconos/emb-logo.png' %}" width="80px" alt="EMB Piscinas">
+            </div>
+            <h1 id="titulo">Te has desconectado.</h1>
+            <p id="registrarse">¡Gracias por utilizar nuestro servicio!</p>
+            <p id="registrarse">Puedes volver a loguearte para seguir utilizando esta plataforma y disfrutar de todas nuestra funcionalidades.</p>
+            <p id="registrarse">¡Hasta la proxima!</p>
+            <div id="registrarse">
+                <button class="boton"><a href="{% url 'login' %}">Login</a></button>
+            </div>
+        </div>
+        <div class="burbujas">
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+        </div>
+    </header>
+
+</body>
+</html>

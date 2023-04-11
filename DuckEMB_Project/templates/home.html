@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'cards-date.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .fondo {
+            width: 100%;
+            height: 586px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: black;
+            border-radius: 30px;
+        }
+
+        #accion {
+            text-align: center;
+        }
+    </style>
+    <title>Title</title>
+</head>
+<body>
+    {% if user.is_staff %}
+        <div class="container-fluid">
+
+            {% if user.is_superuser %}
+
+            <div class="ag-format-container">
+                <div class="ag-courses_box">
+                    <div class="ag-courses_item">
+                        <a href="/ingresos" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                
+                        <div class="ag-courses-item_title">
+                            <img src="{% static '/Iconos/ico-stonks.png' %}" class="me-2" alt="Inicio">
+                            <b>$ <b id="tdIngreso"></b></b>
+                        </div>
+                
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Ingresos generados
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+
+                    <div class="ag-courses_item">
+                        <a href="/egresos" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                
+                        <div class="ag-courses-item_title">
+                            <img src="{% static '/Iconos/ico-no-stonks.png' %}" class="me-2" alt="Inicio">
+                            <b>$ <b id="tdEgreso"></b></b>
+                        </div>
+                
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Egresos realizados
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+
+                    <div class="ag-courses_item">
+                        <a href="/clientes" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                
+                        <div class="ag-courses-item_title">
+                            <img src="{% static '/Iconos/ico-ventas.png' %}" class="me-2" alt="Inicio">
+                            {{ clientes }}
+                        </div>
+                
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Clientes
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            
+            <div class="row">
+                <p></p>
+                <div class="col-sm-8">
+
+                    <div class="card">
+                        <div id="accion" class="card-header">
+                            Costo Total - Combos de Piscinas
+                            {% if user.is_superuser %}
+                                <button class="glow-on-hover" type="button">
+                                    <a href="/graficos" class="boton-link">Ir a Sección "Graficos"</a>
+                                </button>
+                            {% endif %}
+                            </div>
+                            <div class="card-body">
+                            <div>
+                                <div class="grafico">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <p></p>
+
+
+                </div>
+                <div class="col-sm-3">
+                    <h4 id="accion">Acciones</h4>
+                    <p></p>
+                    <div class="ag-courses_item">
+                        <a href="/newarticulo" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                    
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Añadir Articulos
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="ag-courses_item">
+                        <a href="/newpiscina" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                    
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Añadir Piscinas
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="ag-courses_item">
+                        <a href="/newpedido" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                    
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Nuevo Pedido
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                    <div class="ag-courses_item">
+                        <a href="/newadquisicion/" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+                    
+                        <div class="ag-courses-item_date-box">
+                            <span class="ag-courses-item_date">
+                                Nueva Adquisicion
+                            </span>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table id="tablaprueba" class="table table-hover dimension" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Caja</th>
+                    <th>Valor</th>
+                    <th>Metodo de Pago</th>
+                    <th>Pedido</th>
+                    <th>Condicion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        {% for in in ingresos %}
+            <tr>
+                <td>{{ in.idCaja}}</td>
+                <td>{{ in.valor }}</td>
+                <td>{{ in.metodoPago }}</td>
+                <td>{{ in.idPedido }}</td>
+                <td>{{ in.condicion }}</td>
+                <td>
+                    <a href="/modingreso/{{ in.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Ingreso" alt="editar ico" width="30px" class="me-3 ico-boton"></a>
+                    <a href="/deleteingreso/{{ in.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Ingreso" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+
+        <table id="tablaprueba2" class="table table-hover dimension" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Caja</th>
+                    <th>Valor</th>
+                    <th>Metodo de Pago</th>
+                    <th>Adquisicion</th>
+                    <th>Condicion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        {% for in in egresos %}
+            <tr>
+                <td>{{ in.idCaja}}</td>
+                <td>{{ in.valor }}</td>
+                <td>{{ in.metodoPago }}</td>
+                <td>{{ in.idAdquisicion }}</td>
+                <td>{{ in.condicion }}</td>
+                <td>
+                    <a href="/modingreso/{{ in.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Ingreso" alt="editar ico" width="30px" class="me-3 ico-boton"></a>
+                    <a href="/deleteingreso/{{ in.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Ingreso" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    
+    {% else %}
+        <img class="fondo" src="{% static '/Iconos/fondo_pantalla.jpg' %}" alt="Inicio">
+    {% endif %}
+    
+
+    <script>
+        window.addEventListener("load", function(){
+            sumIngresos();
+            sumEgresos();
+        })
+
+        function sumIngresos(){
+            let total = 0;
+            const table = document.getElementById("tablaprueba");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[1].innerHTML;
+                let rowValue2 = table.rows[i].cells[4].innerHTML;
+                if (rowValue2 == "IM") {
+                    rowValue = 0
+                }
+                else if (rowValue2 == "TR") {
+                    rowValue = 0
+                }
+                total = total + Number(rowValue);
+            }
+            const tdTotal = document.getElementById("tdIngreso");
+            tdTotal.textContent = total;
+        }
+
+        function sumEgresos(){
+            let total = 0;
+            const table = document.getElementById("tablaprueba2");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[1].innerHTML;
+                let rowValue2 = table.rows[i].cells[4].innerHTML;
+                if (rowValue2 == "IM") {
+                    rowValue = 0
+                }
+                else if (rowValue2 == "TR") {
+                    rowValue = 0
+                }
+                total = total + Number(rowValue);
+            }
+            const tdTotal = document.getElementById("tdEgreso");
+            tdTotal.textContent = total;
+        }
+    </script>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: [{% for data in data %} '{{ data.descripcion }}', {% endfor %}],
+            datasets: [{
+              label: 'Costo Total ($)',
+              data: [{% for data in data %} '{{ data.total }}', {% endfor %}],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

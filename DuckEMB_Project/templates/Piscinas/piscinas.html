@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <link rel="stylesheet" href="{% static 'cards-article.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Listado - Articulos</title>
+    <script>
+        function mostrar()
+        {
+            variable1 = document.getElementById("seccionPrincipal");
+            variable1.style.display="block";
+            variable2 = document.getElementById("multi");
+            variable2.style.display="none";
+        }
+    </script>
+
+    <script>
+        function ocultar()
+        {
+            variable1 = document.getElementById("multi");
+            variable1.style.display="block";
+            variable2 = document.getElementById("seccionPrincipal");
+            variable2.style.display="none";
+        }
+    </script>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="h-100 pb-3 mb-3" id="categorias">
+        
+        <div class="d-flex justify-content-between">
+            <h2 class="titulo-bloque">
+                Piscinas
+            </h2>
+            {% if user.is_superuser %}
+                <button class="glow-on-hover" type="button">
+                    <a href="/newpiscina/" class="boton-link">Añadir Piscina</a>
+                </button>
+                <button class="glow-on-hover" type="button">
+                    <a href="/graficos/" class="boton-link">Mostrar grafico de Precio</a>
+                </button>
+                <button class="glow-on-hover" type="button">
+                    <a href="/graficos2/" class="boton-link">Mostrar grafico de Stock</a>
+                </button>
+            {% endif %}
+            {% if user.is_staff %}
+                <button class="glow-on-hover" type="button">
+                    <a href="/piscinasPDF/" target="_blank" class="boton-link">Imprimir Listado</a>
+                </button>
+            {% endif %}
+        </div>
+        <p></p>
+        <div class="h-100 pb-3 mb-3" id="categorias">
+            <p></p>
+            <div class="d-flex">
+                <div class="card">
+                    <div class="card-body p-2">
+                        <h5 class="titulo-bloque me-4">
+                            Visualizar:
+                        </h5>
+                        <button class="glow-on-hover" onclick="mostrar()">
+                            Tarjetas
+                        </button>
+                        <button class="glow-on-hover" onclick="ocultar()">
+                            Listado
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+        <div id="seccionPrincipal" style="display: none; padding-left: 140px;">
+            <div class="row">
+                {% for pisc in piscina %}
+                <div style="width: 310px;">
+                    <div class="card-container">
+                        <a href="#" class="hero-image-container">
+                            <img class="imagen-card" src="{{ MEDIA_URL }}{{ pisc.imagen }}">
+                        </a>
+                        <main class="main-content">
+                            <h3>{{ pisc.descripcion }}</h3>
+                            <div class="flex-row">
+                                <div class="coin-base">
+                                    <h5 class="precio">Valor total: $ </h5>
+                                    <h5 class="precio">{{ pisc.total|floatformat:2}}</h5>
+                                </div>
+                            </div>
+                            <div class="coin-base">
+                                {% if user.is_superuser %}
+                                    <a href="/modpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Piscina" alt="editar ico" width="30px" class="me-2 ico-boton"></a>
+                                    <a href="/deletepiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Piscina" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                {% endif %}
+                                    <a href="/detailpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Detalle Piscina" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                {% if user.is_superuser %}
+                                    <a href="/adquisiciónxpiscinas/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-adquisicion_x.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver en Adquisiciones" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                    <a href="/pedidoxpiscinas/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-pedido_x.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver en Pedidos" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                {% endif %}
+                            </div>
+                        </main>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="multi">
+            <!-- Tabla Categorías -->
+            <section class="intro">
+                <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                  <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                      <div class="row justify-content-center">
+                          <div class="card">
+                            <div class="card-body p-0">
+                              <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                <table id="tablax" class="table table-striped mb-0">
+                                    <thead style="background-color: #002d72;">
+                                        <!-- Header Tabla -->
+                                        <tr class="header-tabla">
+                                            <th scope="col">
+                                                Imagen
+                                            </th>
+                                            <th scope="col">
+                                                Piscina (Combo)
+                                            </th>
+                                            <th scope="col">
+                                                Unidades
+                                            </th>
+                                            <th scope="col">
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for pisc in piscina %}
+                                        <tr class="body-tabla">
+                                            <td>
+                                                <img class="prueba" src="{{ MEDIA_URL }}{{ pisc.imagen }}" width="80px">
+                                            </td>
+                                            <td>
+                                                <h5 class="mt-2"><a data-html="true" data-bs-placement="bottom" data-popover-content="#a1" data-toggle="popover" data-bs-trigger="hover" href="#" tabindex="0">{{ pisc.descripcion }}</a></h5>
+                                                <!-- Content for Popover #1 -->
+                                                <div class="hidden d-none" id="a1">
+                                                    <div class="popover-heading">
+                                                        {{ pisc.descripcion }}
+                                                    </div>
+                                                    <div class="popover-body">
+                                                        <b>Base</b>: U$D {{ pisc.base }}<br>
+                                                        <b>Casilla</b>: U$D {{ pisc.sf_casilla }}<br>
+                                                        <b>AC</b>: U$D {{ pisc.ac }}<br>
+                                                        <b>AL</b>: U$D {{ pisc.al }}<br>
+                                                        <b>AH</b>: U$D {{ pisc.ah }}<br>
+                                                        <b>MAM</b>: U$D {{ pisc.mam }}<br>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% if user.is_staff %}
+                                                    {% if pisc.unidades > 0 %}
+                                                        <h5 class="mt-2">{{ pisc.unidades }}</h5>
+                                                    {% else %}
+                                                        <h5><a><img src="{% static '/Iconos/ico-alerta.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Stock Bajo: {{ pisc.unidades }}" alt="editar ico" width="30px" class="ico-boton"></a></h5>
+                                                    {% endif %}
+                                                {% else %}
+                                                <h5 class="mt-2">Consultar</h5>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if user.is_superuser %}
+                                                    <a href="/modpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Piscina" alt="editar ico" width="30px" class="me-2 ico-boton"></a>
+                                                    <a href="/deletepiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Piscina" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                                {% endif %}
+                                                    <a href="/detailpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Detalle Piscina" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                                {% if user.is_superuser %}
+                                                    <a href="/adquisiciónxpiscinas/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-adquisicion_x.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver en Adquisiciones" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                                    <a href="/pedidoxpiscinas/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-pedido_x.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver en Pedidos" alt="eliminar ico" width="30px" class="me-2 ico-boton"></a>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        <!-- End Body Tabla -->
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- End Tabla Categorías -->
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [10, 15, 25, -1], [10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+    <script>
+        $(function(){
+            $("[data-toggle=popover]").popover({
+                html : true,
+                content: function() {
+                    var content = $(this).attr("data-popover-content");
+                    return $(content).children(".popover-body").html();
+                },
+                title: function() {
+                    var title = $(this).attr("data-popover-content");
+                    return $(title).children(".popover-heading").html();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="h-100 pb-5">
+        <div class="d-flex justify-content-between">
+            <h2 class="titulo-bloque">
+                Historico de Adquisiciones
+            </h2>
+        </div>
+        <p></p>
+        <div class="d-flex">
+            <div class="card">
+                <div class="card-body p-2">
+                    <h5 class="titulo-bloque me-4">
+                        Visualizar por:
+                    </h5>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/adquisiciones/" class="boton-link">General</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/adquisicionesPisc/" class="boton-link">Piscinas</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/adquisicionesArt/" class="boton-link">Articulos</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    <p></p> <!-- Separador estetico provisional-->
+    <h2 class="mx-5">Listado de Adquisiciones</h2>
+    <p></p>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablax" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Proveedor</th>
+                                                <th scope="col">Fecha de Entrega</th>
+                                                <th scope="col">Fecha Recibida</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Metodo de Pago</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for adq in adquisicion %}
+                                                <tr>
+                                                    <td>
+                                                        <h5 class="mt-2">{{ adq.id }}</a></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="mt-2">{{ adq.idProveedor }}</td></h5>
+                                                    <td>
+                                                        <h5 class="mt-2">{{ adq.fechaEntrega }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="mt-2">{{ adq.fechaRecibido }}</h5>
+                                                    </td>
+                                                    <td><h5>
+                                                        {% if adq.estado == 'PR' %}
+                                                            <img src="{% static '/Iconos/ico-en-proceso.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Adquisición en proceso" alt="editar ico" width="45px" class="ico-boton">
+                                                        {% elif adq.estado == 'AR' %}
+                                                            <img src="{% static '/Iconos/ico-armado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Adquisición armada" alt="editar ico" width="45px" class="ico-boton">
+                                                        {% elif adq.estado == 'EN' %}
+                                                            <img src="{% static '/Iconos/ico-en-entrega.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Adquisición en entrega" alt="editar ico" width="45px" class="ico-boton">
+                                                        {% elif adq.estado == 'DE' %}
+                                                            <img src="{% static '/Iconos/ico-despachado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Adquisición despachada" alt="editar ico" width="45px" class="ico-boton">
+                                                        {% elif adq.estado == 'CA' %}
+                                                            <img src="{% static '/Iconos/ico-cancelado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Adquisición cancelada" alt="editar ico" width="45px" class="ico-boton">
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="mt-2">{{ adq.metodoPago }}</td></h5>
+                                                    <td>
+                                                        <a href="/modadquisicion/{{ adq.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/deleteadquisicion/{{ adq.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/detailadq/{{ adq.id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p></p> <!-- Separador estetico provisional-->
+    <h2 class="mx-5">Listado de Articulos</h2>
+    <p></p>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablax3" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr>
+                                                <th scope="col">Referencia</th>
+                                                <th scope="col">Articulo</th>
+                                                <th scope="col">Unidades</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for art in articulos %}
+                                                <tr>
+                                                    <td><h5 class="mt-2"><a href="/detailadqart/{{ art.idAdquisicion_id }}">{{ art.idAdquisicion }}</a></h5></td>
+                                                    <td>
+                                                        <h5 class="mt-2"><a href="/detailarticulo/{{ art.idArticulo_id }}">{{ art.idArticulo }}</a></h5>
+                                                    </td>
+                                                    <td><h5 class="mt-2">{{ art.unidades }}</h5></td>
+                                                    <td>
+                                                        <a href="/modadqarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/deleteadqarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/detailadqart/{{ art.id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <p></p> <!-- Separador estetico provisional-->
+    <h2 class="mx-5">Listado de Piscinas</h2>
+    <p></p>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablax2" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr>
+                                                <th scope="col">Referencia</th>
+                                                <th scope="col">Piscina</th>
+                                                <th scope="col">Unidades</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for pisc in piscinas %}
+                                                <tr>
+                                                    <td><h5 class="mt-2"><a href="/detailadqpisc/{{ pisc.idAdquisicion_id }}">{{ pisc.idAdquisicion }}</a></h5></td>
+                                                    <td>
+                                                        <h5 class="mt-2"><a href="/detailpiscina/{{ pisc.idPiscina_id }}">{{ pisc.idPiscina }}</a></h5>
+                                                    </td>
+                                                    <td><h5 class="mt-2">{{ pisc.unidades }}</h5></td>
+                                                    <td>
+                                                        <a href="/modadqpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/deleteadqpiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/detailadqpisc/{{ pisc.id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax2').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax3').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

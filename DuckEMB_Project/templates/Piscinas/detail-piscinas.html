@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{% static 'graficos.css' %}">
+    <link rel="stylesheet" href="{% static 'detail-piscina.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Piscinas</title>
+</head>
+<body>
+  <button class="boton_atras btn btn-secondary">
+    <a href="/piscinas/" style="color: white;">Volver Atras</a>
+  </button>
+
+  <p></p>
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-header">
+          {% for pisc in data %}
+            {{ pisc.descripcion }}
+          {% endfor %}
+        </div>
+        <div class="card-body">
+          <div>
+            {% for pisc in data %}
+              <b>Base</b>: ${{ pisc.base }}<br>
+              <b>Casilla</b>: ${{ pisc.sf_casilla }}<br>
+              <b>AC</b>: ${{ pisc.ac }}<br>
+              <b>AL</b>: ${{ pisc.al }}<br>
+              <b>AH</b>: ${{ pisc.ah }}<br>
+              <b>MAM</b>: ${{ pisc.mam }}<br>
+              <p></p>
+              <img class="imagen-detail" src="{{ MEDIA_URL }}{{ pisc.imagen }}">
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <div id="order_derecha" class="grafico">
+            <canvas id="myChart" width="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+        <script>
+            const ctx = document.getElementById('myChart');
+            new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                labels: ['Base', 'Casilla', 'AC', 'AL', 'AH', 'MAM'],
+                datasets: [{
+                  label: 'Valor ($)',
+                  data: [{% for data in data %} '{{ data.base }}', '{{ data.sf_casilla  }}', '{{ data.ac }}', '{{ data.al }}', '{{ data.ah }}', '{{ data.mam }}',{% endfor %}],
+                  borderWidth: 1
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+        </script>
+
+</body>
+</html>
+
+{% endblock %}

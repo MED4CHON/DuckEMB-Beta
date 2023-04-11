@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'cards-article.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+
+<body>
+    <button class="boton_atras btn btn-secondary">
+        <a href="/articulos/" style="color: white;">Volver Atras</a>
+    </button>
+
+    <p></p> <!-- Separador estetico provisional-->
+
+    <div class="h-100 pb-3 mb-3" id="categorias">
+        <div class="d-flex justify-content-between">
+            {% for pr in prod %}
+                <h2 class="mx-1">Adquisiciones - {{pr.descripcion}}</h2>
+                <button class="glow-on-hover" type="button">
+                    <a href="/adquisicionxArticuloPDF/{{pr.id}}" target="_blank" class="boton-link">Imprimir Listado</a>
+                </button>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+    
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+          <div class="mask d-flex align-items-center h-100">
+            <div class="container">
+              <div class="row justify-content-center">
+                  <div class="card">
+                    <div class="card-body p-0">
+                      <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                        <table id="tablax" class="table table-striped mb-0">
+                            <thead style="background-color: #002d72;">
+                                <tr>
+                                    <th>Referencia</th>
+                                    <th>Articulo</th>
+                                    <th>Unidades</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for art in articulos %}
+                                    <tr>
+                                        <td>
+                                            <a href="/detailadqart/{{ art.idAdquisicion_id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Redirigirse a la Adquisición" alt="detalles ico" width="22px" class="ico-boton">
+                                            {{ art.idAdquisicion }}</a>
+                                        </td>
+                                        <td>
+                                            <a href="/detailarticulo/{{ art.idArticulo_id }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver detalle del Articulo" alt="detalles ico" width="22px" class="ico-boton">
+                                            {{ art.idArticulo }}</a>
+                                        </td>
+                                        <td>{{ art.unidades }}</td>
+                                        <td>
+                                            <a href="/modadqarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                            <a href="/deleteadqarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock %}

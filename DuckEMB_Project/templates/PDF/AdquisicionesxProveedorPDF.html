@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Adquisiciones x Proveedor</title>
+
+    <style>
+        @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 30pt; width: 540pt; top: 50pt; height: 40pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 30pt; width: 540pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 30pt; width: 540pt; top: 772pt; height: 40pt;
+            }
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th {
+            background-color: #96D4D4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #footer_content {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">
+        <h1>Listado de Adquisiciones <br> (Actualizado hasta el: {{horario}})</h1>
+    </div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">
+        Estado: <br> 'PR': En proceso / 'AR': Armado / 'EN': En entrega / 'DE': Despachado / 'CA': Cancelado
+    </div>
+
+    <!-- HTML Content -->
+    <table style="width:100%">
+        <thead>
+            <tr style="height:30px">
+                <th style="width:10%">ID</th>
+                <th style="width:50%">Proveedor</th>
+                <th style="width:10%">Estado</th>
+                <th style="width:30%">Metodo de Pago</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pro in proveedor %}
+                {% for adq in adquisicion %}
+                    {% if adq.idProveedor_id == pro.cuit %}
+                        <tr style="height:40px">
+                            <td>{{ adq.id }}</td>
+                            <td>{{ adq.idProveedor }}</td>
+                            <td>{{ adq.estado }}</td>
+                            <td>{{ adq.metodoPago }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

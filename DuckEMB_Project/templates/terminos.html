@@ -1,0 +1,738 @@
+{% load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="{% static '/js/tooltip.js' %}"></script>
+    <title>Terminos y Condiciones - DuckEMB</title>
+    <style>
+        .formulario {
+            position: fixed;
+            background-color: white;
+            top: 70px;
+            left: 70px;
+            bottom: 70px;
+            width: 90%;
+            border: 1px solid black;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+        body {
+            background-color: rgb(177, 174, 174);
+        }
+        button {
+            width: 160px;
+            height: 50px;
+            background-color: orange;
+            margin-top: 10px;
+            margin-left: 90.5%;
+            text-align: center;
+        }
+
+        a:link, a:visited, a:active {
+            text-decoration:none;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="boton">
+            <a href="/" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Volver a Home">
+                <img class="icon-menu" src="{% static '/Iconos/ico-inicio-blanco.png' %}" width="auto" height="20px" alt="Inicio">
+                Volver a Home
+            </a>
+        </button>
+        <div class="formulario">
+            Actualizado el día 16 de Febrero de 2023, en la localidad de Mina Clavero, departamento de San Alberto, provincia de Córdoba, Argentina.
+            <br>
+            <br>
+            TÉRMINOS Y CONDICIONES
+            <br>
+            <br>
+            Estos Términos y Condiciones (“Términos”) según se publican en nuestra página web de DuckEMB ubicada en
+            www.duckembenterprises.com (haga clic en su región y subsidiaria específica de DuckEMB) abarcan los términos y condiciones – los
+            cuales se modifican de tiempo en tiempo – bajo el cual DuckEMB suministrará Licencias y / o Servicios. Usted acepta estos
+            términos en nombre de la entidad que usted representa (la “Compañía”) (en conjunto con sus Afiliados) ya sea por: (i) firmar física
+            o electrónicamente un Contrato incorporando los Términos, o (ii) colocando una orden con DuckEMB en nombre de la
+            Compañía.
+            <br>
+            <br>
+            1. DEFINICIONES E INTEGRACIÓN
+            <br>
+            <br>
+            En adición a cualquier definición contenida en el cuerpo de estos Términos, las siguientes definiciones aplican:
+            “Afiliados” significa cualquier persona, corporación u otra entidad que ahora o en el futuro, directa o indirectamente controla, es
+            controlada por o está bajo un control común con una parte. Para propósitos de esta definición, “control” significa: (a) con respecto
+            a la corporación, la posesión, directa o indirecta del cincuenta por ciento (50%) o más del poder de votación para elegir directores
+            de la misma; y (b) con respecto a otra entidad, el poder de dirigir la administración de dicha entidad.
+            <br>
+            <br>
+            “Contrato” significa un acuerdo escrito ingresado bajo estos Términos para el suministro de Licencias o la prestación de Servicios
+            entre DuckEMB y la Compañía. Un Contrato de Servicios describirá los Servicios, requisitos y Entregables. Ejemplos de un
+            Contrato incluyen una declaración de trabajo, acuerdo de servicios en la nube (cloud services), u otro acuerdo para servicios
+            administrados, en la nube o profesionales.
+            <br>
+            <br>
+            “Entregables” significa todos los resultados tangibles de los Servicios creados exclusivamente para la Compañía por parte de
+            DuckEMB e identificados en un Contrato. Los entregables pueden incluir datos, reportes y especificaciones.
+            <br>
+            <br>
+            “EULA” (por sus siglas en inglés – end user license agreement) significa el acuerdo de licencia de usuario final, derechos de uso del
+            producto (“PUR” por sus siglas en inglés – product use rights), u otro acuerdo de un Licenciante en relación a Licencias para la
+            Compañía (por ejemplo, un acuerdo de cliente de Microsoft para Servicios en la Nube) al igual que los términos y condiciones
+            estándares aplicables en el momento para los servicios en la nube, de mantenimiento y / o de soporte de software, tal como se
+            enmienden con el tiempo.
+            <br>
+            <br>
+            “Derechos de Propiedad Intelectual” significan las patentes, derechos a los inventos, derechos de autor, software, marcas,
+            nombres comerciales, logos, secretos comerciales, Información Confidencial, compilaciones, diagramas, planos, topografías de
+            circuitos, derechos de bases de datos de know-how, diseños, métodos, procesos, fórmulas, derechos de uso y otros derechos
+            propietarios y privilegios, ya sea registrados o no registrados, en conjunto con todas las mejoras, modificaciones y trabajos
+            derivados de todo lo anterior, y todos los derechos o formas de protección similares o equivalentes que subsisten o subsistirán
+            ahora o en el futuro en cualquier parte del mundo.
+            <br>
+            <br>
+            “Capital de Conocimiento” significa las ideas, conceptos, know-how, habilidades, metodologías y técnicas, ya sea poseídas por
+            DuckEMB antes del inicio de estos Términos o desarrolladas, modificadas, mejoradas o refinadas por DuckEMB durante el
+            curso del desempeño de los Servicios.
+            <br>
+            <br>
+            “Licencias” significa el permiso otorgado por el Licenciante a la Compañía, permitiendo a la Compañía a ejercer ciertos privilegios
+            en relación a su software sin importar si el software esté instalado en las instalaciones o accedido a través de servicios en la nube.
+            Las Licencias a ser suministradas o hechas disponibles bajo estos Términos estarán anotados en la cotización respectiva de
+            DuckEMB, en la orden de compra de la Compañía y en la Confirmación o Confirmaciones de la Orden y pueden incluir derechos
+            de uso temporal (por ejemplo, suscripciones, servicios en la nube), actualizaciones y mejoras, parches o cualquier otro cambio
+            ofrecido por el Licenciante según EULA.
+            <br>
+            <br>
+            “Licenciante” significa cualquier entidad legal que es dueña de los Derechos de Propiedad Intelectual otorgados en las Licencias,
+            con la autoridad de definir el Acuerdo de Licencia de Usuario Final (“EULA”), Términos del Producto (“PT”, por su siglas en inglés) u
+            otros términos y condiciones para el uso de las Licencias.
+            <br>
+            <br>
+            “Confirmación de Orden” significa la aceptación vinculante por parte de DuckEMB a la orden de la Compañía que contiene los
+            detalles de las Licencias, el precio y otros términos acordados por las partes. Para poder evadir cualquier duda, una respuesta
+            generada automáticamente por parte de DuckEMB que no establece los detalles de las Licencias, el precio y otros términos
+            aplicables o una orden de la Compañía, no son suficientes para constituir una Confirmación de Orden válida.
+            <br>
+            <br>
+            “Datos Personales” tiene el mismo significado que “datos personales” bajo el Reglamento General de Protección de Datos (UE)
+            2016/679 del Parlamento Europeo y del Concejo del 27 de Abril del 2016, sobre la protección de personas naturales en relación al
+            procesamiento de datos personales y al movimiento libre de dichos datos.
+            <br>
+            <br>
+            “Reglas de Sanción” significan todas las leyes, reglamentos, reglas y requisitos aplicables en vigor con el tiempo en relación a las
+            sanciones comerciales, financieras o económicas o embargos, incluyendo cualquier sanción o embargo impuesta por el gobierno de
+            Estados Unidos (incluyendo los Reglamentos de Administración de Exportaciones de Estados Unidos y Reglamentos del Tráfico
+            Internacional de Armas), la Unión Europea o cualquier otro estado miembro de la Unión Europea al igual que cualquier control de
+            importación, exportación o reexportación y cualquier restricción de usuario final, uso final y de destino de los Estados Unidos y
+            otros gobiernos que apliquen a los materiales de la otra parte o al uso, transferencia, importación, exportación o reexportación de
+            cualquier producto licenciado o distribuido bajo el Contrato.
+            <br>
+            <br>
+            “Servicios” significan los servicios a ser suministrados por DuckEMB bajo estos Términos y el Contrato aplicable.
+            <br>
+            <br>
+            “DuckEMB” significa la entidad DuckEMB nombrada en la Confirmación de la Orden o Contrato.
+            <br>
+            <br>
+            “PI de DuckEMB” significan los Derechos de Propiedad Intelectual y Capital de Conocimiento de DuckEMB.
+            <br>
+            <br>
+            A menos que se acuerde de otra manera por escrito por DuckEMB, todas las Licencias y Servicios se suministran bajo estos
+            Términos a la exclusión de cualquier otros términos y condiciones establecidos o referidos en cualquier otro documento u otra
+            comunicación usada por la Compañía antes de o al concluir un Contrato. Estos Términos aplicarán a cada Contrato. En el caso de un
+            conflicto entre los Términos y un Contrato, los Términos gobernarán a menos que todas las siguientes apliquen: (i) el Contrato
+            claramente identifique la sección aplicable de los Términos que deben modificarse; y (ii) el Contrato claramente establece que
+            dicha disposición del Contrato reemplaza la disposición en conflicto o inconsistente en los Términos. Cualquier otro intento de
+            alterar o enmendar estos Términos se considerará nulo y no tendrá efecto. Cualquier modificación a estos Términos contenidos
+            dentro del Contrato son efectivos a ese Contrato únicamente y no modificará los Términos para cualquier otro propósito que sea.
+            Los Términos no pueden ser modificados excepto con un documento escrito firmado por todas las partes.
+            <br>
+            <br>
+            2. POLÍTICAS DE ÓRDENES Y ENTREGAS
+            <br>
+            <br>
+            Las cotizaciones de precios y órdenes de compra no son vinculantes sobre ninguna de las partes hasta que DuckEMB emita a la
+            Compañía una Confirmación de Orden o (si ocurre antes) suministra las Licencias o comienza el suministro de Servicios.
+            <br>
+            <br>
+            DuckEMB puede entregar las Licencias a través de transmisiones electrónicas, acceso electrónico, descargas o cualquier otro
+            suministrado por el Licenciante. Si una entrega electrónica no es posible, DuckEMB puede entregar Licencias mediante el envío
+            a la dirección de la Compañía. Las órdenes de la Compañía para Licencias son irrevocables, no cancelables y no pueden ser
+            modificadas una vez que DuckEMB coloque su orden con el Licenciante aplicable. La Compañía puede modificar o cancelar
+            cualquier orden de compra para Licencias en cualquier momento antes que DuckEMB coloque su orden para Licencias para el
+            Licenciante.
+            <br>
+            <br>
+            DuckEMB entregará las Licencias en la ubicación identificada en la Confirmación de la Orden. DuckEMB deberá informar
+            inmediatamente a la Compañía de cualquier retraso en la entrega de las Licencias y deberá proveer a la Compañía la razón por
+            cualquier duración anticipada del retraso. Las Fechas de Entrega son únicamente estimaciones.
+            <br>
+            <br>
+            3. AFILIADOS
+            <br>
+            <br>
+            Los Afiliados de DuckEMB pueden ingresar a una relación contractual con la Compañía en cumplimiento con estos Términos y
+            los Afiliados de la Compañía pueden obtener Licencias y Servicios al ejecutar el Contrato aplicable en adelante. La Compañía y sus
+            Afiliados serán conjunta y respectivamente responsables por todas las órdenes sobre Licencias y Servicios del Afiliado de la
+            Compañía.
+            <br>
+            <br>
+            4. ACEPTACIÓN DE LICENCIAS; POLÍTICA DE DEVOLUCIÓN
+            <br>
+            <br>
+            4.1. La Compañía deberá inspeccionar las Licencias recibidas dentro de un tiempo razonable, sin exceder cinco (5) Días Hábiles
+            de la fecha de recepción, para asegurar que las Licencias entregadas estén en la cantidad y tipo correcto. En el caso de
+            errores en la cantidad o tipo de Licencias, o según la extensión permitida por las políticas de devolución del Licenciante, la
+            Compañía puede regresar estas Licencias. Si la Compañía no objeta la cantidad o tipo de Licencias dentro de cinco (5) Días
+            Hábiles, entonces dichas Licencias serán consideradas como aceptadas sobre la fecha de entrega. DuckEMB no aceptará
+            la devolución de las Licencias suministradas a menos que tales devoluciones sean admisibles según las políticas de
+            devolución del Licenciante. Si las Licencias recibidas no son las detalladas en el Contrato, la Compañía deberá informar a
+            DuckEMB en un tiempo no mayor a diez (10) Días Hábiles después de la entrega.
+            <br>
+            <br>
+            4.2. La Compañía reconoce que el EULA o PT de ciertos Licenciantes tienen disposiciones de renovación automática para las
+            Licencias, que requieren que las entidades con las licencias provean un aviso de su intención de no renovar una Licencia. Si
+            las Licencias compradas bajo un Contrato contienen una disposición de renovación automática, DuckEMB deberá hacer
+            los esfuerzos comercialmente razonables de notificar a la Compañía de dicha disposición dentro del Contrato. Si la
+            Compañía no desea renovar una Licencia con una disposición de renovación automática, entonces la Compañía deberá: (i)
+            proveer aviso a DuckEMB de su intención de no renovar la Licencia con treinta (30) días de anticipación a cualquier
+            periodo requerido por el Licenciante en el EULA o PT; y (ii) proveer aviso de su intención de no renovar la Licencia al
+            Licenciante según se requiere por el EULA o PT. Por ejemplo, si el EULA o PT de un Licenciante requieren un aviso
+            anticipado de treinta (30) días de su intención de no renovar, entonces la Compañía deberá proveer a DuckEMB un
+            aviso anticipado de sesenta (60) días de su intención de no renovar. Si la Compañía falla en entregar el aviso requerido de
+            su intención de no renovar, entonces la Licencia se renovará y la Compañía será responsable por el pago.
+            <br>
+            <br>
+            5. ACEPTACIÓN DE ENTREGABLES
+            <br>
+            <br>
+            DuckEMB deberá notificar a la Empresa al momento de completar los Servicios (“Notificación de Finalización”). La Compañía
+            deberá examinar los Servicios y cualquier Entregable correspondiente y declarar o rechazar (por defectos de material únicamente)
+            la aceptación por escrito y firmado por un representante autorizado dentro de diez (10) Días Hábiles después de la recepción de la
+            Notificación de Finalización. Si la Compañía no provee un aviso de defectos dentro de diez (10) Días Hábiles, entonces los Servicios
+            y Entregables correspondientes se considerarán como aceptados.
+            <br>
+            <br>
+            6. LICENCIAS ACADÉMICAS, SIN FINES DE LUCRO Y GUBERNAMENTALES
+            <br>
+            <br>
+            Ciertos productos solo están disponibles para compra por instituciones calificadas, tales como instituciones educativas (productos
+            “Académicos”), organizaciones sin fines de lucro calificadas (productos “Sin Fines de Lucro”) o unidades gubernamentales
+            (productos “Gubernamentales”). Al identificarse como una institución calificada, la Compañía representa que está familiarizada con
+            todos los requisitos del Licenciante en relación al producto y que cumple con todos los requisitos del Licenciante para tal producto
+            Académico, Sin Fines de Lucro o Gubernamental.
+            <br>
+            <br>
+            7. SERVICIOS
+            <br>
+            <br>
+            DuckEMB deberá realizar los Servicios con debido cuidado y en concordancia con los Contratos. No se le requerirá a
+            DuckEMB que siga solicitudes o instrucciones (“Solicitud de Cambio”), que cambien o suplementen la sustancia o alcance de los
+            Servicios descritos en el Contrato. Si DuckEMB provee los Servicios descritos en una Solicitud de Cambio, entonces la Compañía
+            deberá pagar por tales Servicios en cumplimiento con estos Términos y el Contrato aplicable. DuckEMB no otorga el logro de un
+            resultado de trabajo particular.
+            <br>
+            <br>
+            8. OBLIGACIONES DE LA COMPAÑÍA
+            <br>
+            <br>
+            8.1. La Compañía deberá: (a) cooperar con DuckEMB en todos los asuntos relacionados al Contrato para facilitar el
+            suministro de los Servicios y Licencias; (b) proveer toda la información que DuckEMB pueda solicitar para poder llevar a
+            cabo los Servicios y proveer las Licencias de manera oportuna y asegurar que sea precisa en todos los aspectos materiales;
+            (c) proveer acceso oportuno a la Propiedad Intelectual de la Compañía, instalaciones, datos y alojamiento enla oficina y
+            otras instalaciones según se acuerden con la Compañía por escrito de manera anticipada y según sea necesaria para el
+
+            propósito de proveer los Servicios; y (d) informar a DuckEMB de las reglas y reglamentos de higiene y seguridad y
+            cualquier otro requisito de seguridad razonable en sus instalaciones.
+            <br>
+            <br>
+            8.2. Si el desempeño de DuckEMB es prevenido o retrasado por cualquier acto u omisión de la Compañía, sus agentes,
+            subcontratistas o empleados, la Compañía deberá pagar a DuckEMB todos los costos razonables, tarifas o pérdidas
+            sostenidas o incurridas por DuckEMB como resultado de dicho retraso.
+            <br>
+            <br>
+            8.3. La Compañía será la única responsable por: (i) respaldar sus datos; (ii) asegurar la operación normal de su propio software;
+            y (iii) el ambiente necesario de operación del software.
+            <br>
+            <br>
+            8.4. La Compañía deberá pagar las facturas de DuckEMB según se suministra en la Sección 9.
+            <br>
+            <br>
+            9. PRECIOS; PAGOS; IMPUESTOS
+            <br>
+            <br>
+            9.1. La Compañía deberá pagar a DuckEMB por las Licencias y los Servicios en conjunto con todos los cargos acordados que
+            se establecen en el Contrato. Todos los precios y disponibilidad están sujetos a cambios a menos que se acuerde a través de
+            una Confirmación de Orden o Contrato vinculante firmado por las dos partes.
+            <br>
+            <br>
+            9.2. Si las Licencias o servicios de terceros consisten en servicios basados en el consumo, incluyendo servicios de suscripción que
+            están desempeñados por un tercero distinto a DuckEMB, entonces la tarifa para tal servicio será determinada por el
+            Licenciante o la compañía realizando el servicio. Tales tarifas no siempre están fijas y pueden estar sujetas al uso de los
+            Servicios y Licencias aplicables por parte de la Compañía. La Compañía deberá revisar y aceptar el modelo de facturación y
+            deberá pagar las tarifas en concordancia con los términos de cualquier tercero. La Compañía es la única responsable por
+            entender el modelo de facturación del tercero.
+            <br>
+            <br>
+            9.3. DuckEMB facturará, y la Compañía deberá pagar los montos facturados, más los impuestos pertinentes, incluyendo
+            todos los aplicables impuestos de retención, impuestos de importación, gravámenes y aranceles que resulten de
+            transacciones transfronterizas (transacciones donde DuckEMB y la Compañía sean residentes fiscales de diferentes
+            países). Si se le requiere a la Compañía por ley deducir o retener cualquier impuesto de cualquier monto pagadero en una
+            transacción transfronteriza, el monto pagadero dentro del mismo será aumentado de tal manera que después de hacer
+            todas las deducciones y retenciones, DuckEMB reciba un monto igual al monto que hubiese recibido en el caso que no
+            se hayan realizado dichas deducciones y retenciones.
+            <br>
+            <br>
+            9.4. En la ausencia de cualquier programación de facturación acordada expresamente, la Compañía deberá pagar todos los
+            montos en relación a los Servicios suministrados por DuckEMB al final de cada mes calendario vencido.
+            <br>
+            <br>
+            9.5. Si no se indican términos de pago en el Contrato, las facturas automáticamente son pagaderas dentro de 14 días calendario
+            después de la fecha de la factura. Todos los pagos hechos por la Compañía a DuckEMB deberán ser en la moneda del
+            país donde se ubica DuckEMB, el cual entrega las Licencias o Servicios, a menos que se acuerde de otra manera por las
+            Partes.
+            <br>
+            <br>
+            9.6. Si la Compañía no paga los montos debidos de manera oportuna, entonces la Compañía deberá pagar cargos por intereses y
+            tarifas por pagos en mora sobre el monto pendiente, sin que sea necesaria una demanda escrita o un aviso de mora. Todos
+            los montos vencidos cargarán intereses de por lo menos 1.5% mensual o a la tasa más alta permitida por la ley, hasta que la
+            factura se haya pagado en su totalidad.
+            <br>
+            <br>
+            9.7. La Compañía deberá pagar todos los cargos incurridos por los usuarios autorizados de su cuenta, mediante tarjeta de
+            crédito, transferencia bancaria u otros mecanismos de pago similares en efecto. Según lo permitido por la ley aplicable,
+            DuckEMB puede requerir que la Compañía pague los cargos por transacciones de pago gravados por los emisores de
+            tarjetas de crédito en relación a compras. La Compañía deberá reembolsar a DuckEMB por todas las tarifas bancarias en
+            relación a cheques, tarjetas de crédito o bancarias, y documentos de ventas retornados por el banco o emisor de tarjeta de
+            la Compañía. La Compañía deberá pagar honorarios legales, costos de la corte, tarifas de agencias de cobros, o cualquier
+            otro costo incurrido por DuckEMB para cobrar cualquier monto en mora debido.
+            <br>
+            <br>
+            9.8. La Compañía no deberá saldar montos en contra de los montos pagaderos bajo el Contrato.
+
+            <br>
+            <br>
+            9.9. En el caso de mora de pago por parte de la Compañía por más de catorce (14) días calendario, DuckEMB tendrá el
+            derecho de prohibir el uso de Licencias, Servicios y Entregables con efecto inmediato (derecho contractual de prohibición /
+            suspensión de servicios).
+            <br>
+            <br>
+            9.10. DuckEMB retiene el título sobre las Licencias, conjuntamente con todo derecho, título e interés a los Servicios y
+            Entregables hasta que todos los reclamos de pago futuros en contra de la Compañía al momento del servicio o en conexión
+            con los artículos de entrega que se hayan acordado. En relación a las cuentas actuales, la posesión retenida deberá ser
+            considerada como una garantía por el saldo compensado o cuenta actual por cobrar e la Compañía.
+            <br>
+            <br>
+            10. GARANTÍAS Y RENUNCIAS
+            <br>
+            <br>
+            10.1. Cada parte declara que: (i) son una entidad legal en buen estado de operaciones bajo las leyes de la jurisdicción en la cual
+            están organizadas; (ii) tienen todo el poder y la autoridad para ingresar a estos Términos y a cualquier Contrato, el cual
+            creará un acuerdo vinculante entre las partes; y (iii) el desempeño de las partes presentes no violará ninguna obligación o
+            responsabilidad debida a un tercero.
+            <br>
+            <br>
+            10.2. La Compañía reconoce que DuckEMB solo entrega Licencias sujetas a la EULA y PT aplicables, las cuales pueden
+            contener una garantía limitada del Licenciante. Todos los derechos y remedios de la Compañía en relación a las Licencias,
+            garantías, responsabilidad e indemnización serán gobernadas por el EULA, PT u otra documentación aplicable. La Compañía
+            reconoce que se le requerirá ingresar a un EULA, PT o acuerdo de usuario final similar con el Licenciante como una
+            condición precedente a usar el software del Licenciante. El EULA / PT o acuerdo similar delimitará todas las garantías y
+            representaciones en relación a las Licencias compradas. DuckEMB no hace ninguna representación o garantía en
+            relación a las Licencias compradas. DuckEMB no hace ninguna declaración o garantía en relación a cualquier Licencia o
+            software.
+            <br>
+            <br>
+            10.3. Todos los servicios de terceros distribuidos por DuckEMB son entregados con la garantía limitada del proveedor de
+            servicios. Las garantías por los servicios de terceros que no son realizadas por DuckEMB estarán gobernadas por las
+            políticas y procedimientos aplicables del proveedor de servicio únicamente. DuckEMB no hace ninguna garantía expresa
+            o implícita por servicios de terceros.
+            <br>
+            <br>
+            10.4. DuckEMB declara y garantiza que: (a) desempeñará los Servicios y entregará las Licencias usando personal con las
+            habilidades, calificaciones y experiencia en concordancia con estos Términos y el Contrato aplicable; y (b) desempeñará los
+            Servicios de manera profesional y bien ejecutada y en concordancia con el Contrato aplicable y todas las leyes, reglas y
+            reglamentos aplicables.
+            <br>
+            <br>
+            10.5. Siempre que se acuerden los SLA por escrito, el incumplimiento de los acuerdos de nivel de servicio (“SLA”, por sus siglas en
+            inglés, Service Level Agreement) es considerado ser relevante o considerado un incumplimiento material de estos Términos
+            y el Contrato aplicable, solo si DuckEMB ha violado culpablemente los parámetros del SLA (negligencia o acto
+            deliberado) y si dicha violación dura por un periodo de al menos tres (3) meses; además, DuckEMB solo debe ser
+            sostenido como responsable de la falta de disponibilidad de un servicio (por ejemplo, Servicios en la Nube) si ocurre fuera
+            de una ventana regular o irregular de servicio / mantenimiento (las ventanas de servicios se describen en el documento SLA
+            del Servicio respectivo). En el caso de un pago de créditos de servicio o penalidades por incumplimiento del SLA, este es el
+            único y exclusivo remedio de la Compañía y las futuras obligaciones y responsabilidades de DuckEMB en relación a los
+            reclamos identificados anteriormente son excluidos.
+            <br>
+            <br>
+            10.6. EXCEPTO COMO SE ESTABLECE EN ESTA SECCIÓN 10, O LAS DESCRIPCIONES APLICABLES DEL EULA, PT Y DE SERVICIO, POR
+            ESTE MEDIO, DuckEMB RENUNCIA A TODA GARANTÍA DE ALGÚN TIPO, INCLUYENDO COMERCIABILIDAD,
+            ADECUACIÓN PARA UN PROPÓSITO EN PARTICULAR, NO INFRACCIÓN, TÍTULO U OBJETO QUE SALGA DEL CURSO DE LA
+            PRÁCTICA DE NEGOCIACIÓN, USO O COMERCIO.
+            <br>
+            <br>
+            11. LIMITACIÓN DE RESPONSABILIDAD
+            <br>
+            <br>
+            11.1. La responsabilidad de DuckEMB por cualquier daño en relación a las Licencias o Servicios disponibles a través de
+            DuckEMB son limitados al valor de los montos pagados por la Compañía bajo el Contrato por tales Licencias o Servicios
+            durante los últimos doce meses calendario precedentes al incidente que da surgimiento al daño. En ningún caso
+
+            DuckEMB será responsable por cualquier daño o perjuicio, daño incidental, consecuente, especial, punitivo o indirecto
+            de ningún tipo, incluyendo daños resultando por el retraso, pérdida de ganancias, pérdida de oportunidad de negocios,
+            pérdida de contenido, interrupción de negocios o pérdida de buena voluntad, las cuales pueden surgir en conexión con o en
+            pertinencia a estos Términos o cualquier Contrato, incluso si dicha parte ha sido notificada de la posibilidad o probabilidad
+            de que ocurran tales daños bajo cualquier teoría de ley (incluyendo agravio u otra teoría).
+            <br>
+            <br>
+            11.2. NADA EN ESTOS TÉRMINOS O CUALQUIER CONTRATO LIMITA LA RESPONSABILIDAD DE CUALQUIERA DE LAS PARTES POR:
+            <br>
+            <br>
+            (A) MUERTE O DAÑO PERSONAL CAUSADO POR SU NEGLIGENCIA; (B) FRAUDE O REPRESENTACIÓN FRAUDULENTA; (C)
+            MALA CONDUCTA VOLUNTARIA; (D) VIOLACIÓN DE LOS DERECHOS DE PROPIEDAD INTELECTUAL DE LA OTRA PARTE; (E) EL
+            INCUMPLIMIENTO DE OBLIGACIONES DE CONFIDENCIALIDAD; (F) OBLIGACIONES DE PAGO DE LA COMPAÑÍA; O LAS QUE
+            (G) NO PUEDEN SER LIMITADAS BAJO LA LEY APLICABLE.
+            <br>
+            <br>
+            11.3. La Compañía está de acuerdo que cualquier Contrato u otro documento en relación a la compra de las Licencias o Servicios
+            presentado a DuckEMB que incluye cualquier garantía a la Compañía o que incluye un lenguaje que puede crear
+            responsabilidad para DuckEMB, o que está en conflicto con estos Términos, es nulo o queda sin efecto, a menos que
+            cumpla con los requisitos de integración establecido en la Sección 1.
+            <br>
+            <br>
+            11.4. Algunas jurisdicciones no permiten la limitación o exclusión de garantías o daños, así que las limitaciones sobre daños
+            puede que no apliquen.
+            <br>
+            <br>
+            12. DERECHOS DE PROPIEDAD INTELECTUAL; INDEMNIZACIÓN DE PI (Propiedad Intelectual)
+            <br>
+            <br>
+            12.1. Excepto según sea expresamente suministrado en esta Sección 12, nada en estos Términos proveen a la Compañía algún
+            derecho, título o interés en o cualquier Derecho de Propiedad Intelectual comprendido en las Licencias o los Servicios, la
+            cual en todo momentos debe permanecer propiedad de DuckEMB o de los Licenciantes, según aplique.
+            <br>
+            <br>
+            12.2. DuckEMB deberá asistir a la Compañía con el manejo de cualquier reclamo o problema asociado con el Licenciante. La
+            Compañía reconoce que DuckEMB no es el editor o desarrollador de las Licencias y las únicas garantías o
+            indemnizaciones o derechos de licencias son aquellos otorgados por el Licenciante.
+            <br>
+            <br>
+            12.3. La Compañía representa y garantiza que está comprando las Licencias para su propio uso interno y no para reventa.
+            <br>
+            <br>
+            12.4. En el caso de conflicto entre estos Términos y el EULA / PT o acuerdo similar en relación al alcance de los Derechos de
+            Propiedad Intelectual, las garantías y representaciones otorgadas a la Compañía, el EULA / PT prevalecerá.
+            <br>
+            <br>
+            12.5. Al momento del pago complete y final de los Entregables, DuckEMB deberá otorgar y por este medio otorga a la
+            Compañía una licencia perpetua, mundial, completamente pagada y libre de regalías para usar los Entregables aplicables
+            para propósitos internos.
+            <br>
+            <br>
+            12.6. DuckEMB posee todo derecho, título e interés en toda la Propiedad Intelectual de DuckEMB, ya sea en posesión de
+            DuckEMB previo al inicio de estos Términos o desarrollado, mejorado o refinado por DuckEMB durante el curso del
+            desempeño de los Servicios. Si DuckEMB incluye cualquier PI de DuckEMB o Capital de Conocimiento dentro de los
+            Entregables, entonces DuckEMB deberá otorgar a la Compañía licencia limitada, perpetua, completamente pagada,
+            libre de regalías, no exclusiva, sin poder cederse, no transferible, revocable (únicamente por incumplimiento de licencia)
+            para usar, copiar, modificar, mejorar y mantener (i) la Propiedad Intelectual de DuckEMB (pero excluyendo el Capital de
+            Conocimiento) para los propósitos internos de la Compañía y únicamente a la extensión necesaria para usar los
+            Entregables; y (ii) El Capital de Conocimiento de DuckEMB según incorporado en, o la extensión necesaria para su uso
+            del PI de DuckEMB o los Entregables para los propósitos internos de la Compañía.
+            <br>
+            <br>
+            12.7. Los Derechos de Propiedad Intelectual de Terceros entregados como parte del Servicio estarán disponibles a la Compañía
+            sujetos a los términos suministrados por dicho tercero, el cual DuckEMB hará disponible a la Compañía al momento de
+            su solicitud.
+            <br>
+            <br>
+            12.8. La Compañía por este medio otorga a DuckEMB una licencia revocable, no exclusiva, libre de regalías para usar los
+            Derechos de Propiedad Intelectual de la Compañía para permitir a DuckEMB a realizar los Servicios o identificar nuevos
+            Servicios para la Compañía. La Compañía se reserva todo otro derecho, título e interés a sus Derechos de Propiedad
+            Intelectual.
+            <br>
+            <br>
+
+            12.9. La Compañía no debe y no deberá permitir a ningún Afiliado o tercero a que traduzca, aplique ingeniería inversa,
+            descompile, recompile, actualice o modifique alguna Propiedad Intelectual de DuckEMB o cualquier Entregable para el
+            objetivo de descubrir la PI de DuckEMB. Si la Compañía provee cualquier retroalimentación, comentario o sugerencia en
+            relación a los Servicios, PI de DuckEMB, o los planes de negocios o de tecnología de DuckEMB, incluyendo
+            comentarios o sugerencias en relación a la posible creación, desarrollo, modificación, corrección o mejora de los Servicios o
+            PI de DuckEMB (colectivamente la “Retroalimentación”), entonces la Compañía deberá otorgar y por este medio otorga
+            a DuckEMB la licencia perpetua, no exclusiva, mundial, libre de regalías para usar dicha Retroalimentación sin
+            restricción alguna.
+            <br>
+            <br>
+            12.10. Datos Agregados y Datos de Análisis. A pesar de cualquier disposición contraria en cualquier Contrato, DuckEMB puede
+            compilar y retener Datos Agregados recolectados de o presentados a través de los Servicios y los Datos de Análisis que cree
+            durante el desempeño de los Servicios, para propósitos de operar, mantener, analizar y mejorar sus Servicios, PI de
+            DuckEMB y Capital de Conocimiento, al igual que la investigación y desarrollo de nuevos servicios, PI de DuckEMB, y
+            Capital de Conocimiento. “Datos Agregados” significa la información y datos recolectados de o presentados, confirmados, o
+            suministrados por los usuarios en el curso de su acceso y uso de los Servicios. “Datos de Análisis” significa el análisis de
+            DuckEMB del uso de sus Servicios, PI de DuckEMB, y Capital de Conocimiento. DuckEMB tendrá posesión de
+            todo derecho, título e interés en y con todos los Datos Agregados y Datos de Análisis, provisto que tales Datos Agregados y
+            Datos de Análisis serán anonimizados de tal manera que no identifiquen a la Compañía o a cualquier usuario.
+            <br>
+            <br>
+            12.11. Indemnización de DuckEMB. DuckEMB indemnizará y defenderá a la Compañía de daños directos que surjan de
+            cualquier reclamo de un tercero en la que los Entregables violen cualquier patente, derecho de autor, marca o derecho
+            secreto comercial bajo la posesión de dicho tercero. En ningún caso DuckEMB tendrá alguna obligación bajo esta
+            Sección 12 o cualquier responsabilidad por reclamo alguno o acción al punto que el reclamo sea causado por, o que resulte
+            de: (a) combinación o uso de la Compañía de los Entregables con software, servicios o productos desarrollados por la
+            Compañía o terceros; (b) modificación de los Entregables por cualquiera distinto a DuckEMB; (c) la presunta actividad
+            de violación continua de la Compañía, después de habérsele suministrado modificaciones que pudieron haber evitado la
+            supuesta violación; o (d) el uso de los Entregables por parte de la Compañía de una manera que no esté en concordancia
+            con el Contrato aplicable. En el caso de que los Entregables estén sujetos a un reclamo por violación, DuckEMB deberá,
+            a su opción: (i) procurar el derecho de la Compañía a continuar usando los Entregables; (ii) hacer dicha alteración,
+            modificación o ajuste a los Entregables para que puedan dejar de realizar violaciones sin incurrir en disminución material en
+            función a la estimación razonable de la Compañía; o (iii) reemplazar los Entregables que causen violaciones a ningún costo
+            para la Compañía con sustitutos que no causen violaciones provisto que los sustitutos no conlleven a disminución material
+            en función a la estimación razonable de la Compañía. Si ninguna de las anteriores es razonable, bajo la discreción razonable
+            de DuckEMB, la compañía retornará los Entregables que causen violación y DuckEMB reembolsará inmediatamente
+            la suma de todos los pagos realizados por la Compañía bajo concepto de dichos Entregables.
+            <br>
+            <br>
+            12.12. Indemnización de la Compañía. La Compañía Indemnizará y defenderá a DuckEMB de cualquier daño que surja de un
+            reclamo de un tercero en la que los Activos de la Compañía o los Derechos de Propiedad Intelectual de la Compañía, usados
+            por DuckEMB en conexión con los Servicios, violen cualquier patente, derecho de autor, marca o derecho de secreto
+            comercial bajo la posesión de dicho tercero.
+            <br>
+            <br>
+            12.13. Requisitos de Indemnización; Remedio Único. La obligación de la parte que indemniza para indemnizar a la parte
+            indemnizada en cumplimiento a esta Sección 12 depende de la parte indemnizada: (a) proveer a la parte que indemniza un
+            aviso inmediato por escrito de cualquier reclamo; (b) presentar el control exclusivo de la defensa de cualquier reclamo a la
+            parte que indemniza; y (c) cooperar razonablemente con la parte que indemniza en la defensa del reclamo, al costo de la
+            parte que indemniza. Esta Sección 12 establece el único y exclusivo remedio de la parte indemnizada, y la obligación y
+            responsabilidad entera de la parte que indemniza en relación a los reclamos identificados anteriormente.
+            <br>
+            <br>
+            13. SOPORTE
+            <br>
+            <br>
+            DuckEMB no proveerá ningún soporte técnico, entrenamiento o instalación, a menos que esté expresamente suministrado en
+            un Contrato. Si DuckEMB provee servicios de soporte (por ejemplo Servicios en la Nube) sin ningún cargo de uso adicional,
+            DuckEMB se reserva el derecho a limitar las solicitudes de soporte a cierto número de solicitudes por año contractual y de
+            referir a la Compañía a los servicios de soporte basados en tarifas en todos los demás sentidos.
+
+            <br>
+            <br>
+            14. PLAZO, TERMINACIÓN & SUPERVIVENCIA
+            <br>
+            <br>
+            14.1. El Contrato incluyendo estos Términos son efectivos al momento de ejecución, presentación de la Confirmación de la
+            Orden, o entrega de los Servicios / Licencias – según sea el caso – y permanecerán en efecto hasta que se completen según
+            se suministra en la presente. A menos que se acuerde de otro modo en el Contrato, el cual puede ser suministrado por un
+            plazo más largo o más corto, cualquier Contrato por Servicios administrados (según se definen en dicho Contrato) tendrán
+            un término de un (1) año (“Plazo Inicial”). Excepto según lo previsto en un Contrato, después del Plazo Inicial, un Contrato
+            por Servicios Administrados se renovarán automáticamente por plazos adicionales de treinta (30) días.
+            <br>
+            <br>
+            14.2. DuckEMB puede terminar cualquier Contrato o modificar los Términos a continuación en cualquier momento y por
+            cualquier razón al proveer treinta (30) días de aviso por escrito anticipado a la otra parte. Los términos y condiciones de
+            estos Términos sobrevivirán a cualquier terminación con respecto a cualquier Contrato hasta su vencimiento.
+            <br>
+            <br>
+            14.3. Cualquiera de las partes puede terminar inmediatamente los Términos o cualquier Contrato presente al suministrar aviso
+            por escrito a la otra parte si: (a) la otra parte realiza algún incumplimiento o violación material de cualquiera de sus
+            obligaciones bajo los Términos o bajo el Contrato aplicable que permanece sin resolverse por treinta (30) días seguidos del
+            aviso por escrito por lo mismo, o en el caso de un incumplimiento que no pueda ser resuelto dentro de treinta (30) días, la
+            parte que causa la violación no actúa para resolver el incumplimiento dentro de un periodo de treinta (30) días; (b) la otra
+            parte suspende o amenaza en suspender el pago de sus deudas o es incapaz de pagar sus deudas a medida estás sean
+            debidas o admite su incapacidad de pagar sus deudas o está involucrado en cualquier procedimiento en relación a la
+            refinanciación de deuda, un arreglo con acreedores, o un proceso de liquidación, a aplazamiento; (c) una parte tiene el
+            derecho a designar a un síndico sobre los activos de la otra parte o un síndico ha sido designado sobre los activos de la otra
+            parte: (d) un acreedor o un acreedor hipotecario de la otra parte adjunta o toma posesión de, aflicción, ejecución, embargo
+            o cualquier otro dicho proceso se imponga o se aplique sobre o se demande en contra de todos o cualquier parte de los
+            activos de la otra parte y que tal adjunto o proceso no sea descargado dentro de diez (10) Días Hábiles; o (e) la otra parte
+            suspende o cesa, o amenaza en suspender o cesar, en llevar a cabo todas o una parte sustancial de sus negocios.
+            <br>
+            <br>
+            14.4. Las Secciones 1, 3, 4, 8.4, 9, 10, 11, 12, 14, 16, 17, 18, 19, 20, 21 y 22 sobrevivirán a cualquier terminación de estos
+            Términos.
+            <br>
+            <br>
+            15. FUERZA MAYOR
+            <br>
+            <br>
+            DuckEMB no será responsable a la Compañía por cualquier pérdida o daño que pueda haber sufrido la Compañía como un
+            resultado directo o indirecto del suministro de Licencias y Servicios por DuckEMB que prevengan, obstaculicen, retrasen o que
+            rinda no ser económico por razón de circunstancias o eventos más allá del control razonable de DuckEMB incluyendo pero no
+            limitado a fuerza mayor, guerra, disturbios, huelgas, bloqueos, incendio, inundación y tormenta.
+            <br>
+            <br>
+            16. CONFIDENCIALIDAD
+            <br>
+            <br>
+            16.1. Definición. “Información Confidencial” significa la información no pública de información competitiva, comerciablemente
+            sensible, propietaria, financiera o secreto comercial que involucre o implique los intereses de privacidad. La Información
+            Confidencial incluye cualquier información rotulada como “Confidencial” o “Propietaria”, planes de negocios, estrategias,
+            pronósticos, análisis, información financiera, información de empleados, información de tecnología, secretos comerciales,
+            productos, datos técnicos, especificaciones, documentación, reglas y procedimientos, métodos, contratos, presentaciones,
+            know-how, planes de productos, métodos de negocios, funcionabilidad de productos, datos, clientes, mercados, análisis
+            competitivos, bases de datos, formatos, metodologías, aplicaciones, desarrollos, inventos, procesos, pagos, procedimientos
+            de entrega e inspección, diseños, dibujos, algoritmos, fórmulas o información en relación a la ingeniería, mercadeo o
+            finanzas y cualquier otra información que el Receptor deba razonablemente creer que sea confidencias debido a las
+            circunstancias.
+            <br>
+            <br>
+            16.2. Exclusiones de Confidencialidad. La Información Confidencial excluye información que: (i) es conocida por el Receptor antes
+            de su recepción; (ii) es ahora o se convierte de conocimiento público por actos no atribuibles al Receptor; (iii) sea divulgada
+            al Receptor por un tercero que tiene el derecho legal de hacer dicha divulgación; (iv) sea divulgada por el Receptor con el
+
+            consentimiento previo por escrito del Divulgador; (v) se desarrolle subsecuentemente por el Receptor independientemente
+            de cualquier divulgación hecha a continuación y sin uso o acceso a cualquier Información Confidencial el Divulgador, o (vi)
+            sea requerida a ser divulgada en cumplimiento a un reglamento gubernamental o por orden de la corte.
+            <br>
+            <br>
+            16.3. Obligaciones de Confidencialidad. Cada parte reconoce que cierta información que recibirá de la otra parte puede ser
+            Información Confidencial de la otra parte. Cualquier parte que reciba Información Confidencial (“Receptor”) deberá ejercer
+            el mismo grado de cuidado y protección en relación la Información Confidencial de la parte que divulga la Información
+            Confidencial (“Divulgador”) que ejerce en relación a su propia Información Confidencial, pero en ningún caso menor que
+            cualquier estándar razonable de cuidado. El Receptor y su personal solo pueden usar la Información Confidencial del
+            Divulgador al punto necesario para cumplir sus obligaciones bajo el Contrato aplicable. El Receptor no deberá, directa o
+            indirectamente, divulgar, copiar, distribuir, republicar o permitir a ningún tercero a tener acceso a cualquier Información
+            Confidencial del Divulgador. El Receptor solo puede divulgar la Información Confidencial a su personal, si dicho personal
+            tiene necesidad a conocer la Información Confidencial para que el Receptor pueda realizar sus obligaciones bajo el Contrato
+            aplicable, y dicho personal haya estado de acuerdo por escrito en cumplir con la confidencialidad de las obligaciones
+            contenidas en estos Términos.
+            <br>
+            <br>
+            16.4. Medidas Cautelares. Cada parte reconoce que cualquier violación de sus obligaciones en relación a la Información
+            Confidencial resultará en daños a la otra parte que son extensamente intangibles pero sin embargo reales, y que no pueden
+            ser remediadas bajo una compensación de daños. De acuerdo a ello, cualquier dicha violación dará a la otra parte el
+            derecho inmediato a una medida ordenada por la corte u otra orden apropiada para imponer estas obligaciones. El derecho
+            de una parte a medidas cautelares es adicional a cualquier otro derecho y compensación disponible a dicha parte bajo ley y
+            en capital. La parte en contra la cual dicha medida se haya aplicado deberá pagar a la otra parte todos los gastos
+            razonables, incluyendo honorarios legales, incurridos en la obtención de dicha imposición.
+            <br>
+            <br>
+            17. PROTECCIÓN DE DATOS
+            <br>
+            <br>
+            17.1. Las Partes asegurarán que los Datos Personales sean procesados en concordancia con las leyes y reglamentos aplicables de
+            privacidad y de protección de datos.
+            <br>
+            <br>
+            17.2. Si DuckEMB procesa Datos Personales únicamente para el propósito de proveer los Servicios acordados y actúe en
+            nombre de y bajo instrucciones de la Compañía, DuckEMB tratará dichos Datos Personales como confidenciales e
+            implementará las medidas técnicas y organizacionales apropiadas para proteger estos datos. La Compañía está de acuerdo
+            que DuckEMB puede poner a sus afiliados como otro procesador y subcontratista cuando contribuye a los Servicios.
+            <br>
+            <br>
+            17.3. Dentro del alcance de la aplicación de la RGPD (Reglamento General de Protección de Datos (UE) 2016/679), lo siguiente
+            aplica: al punto que el uso o implementación de los Servicios de DuckEMB involucren el procesamiento de Datos
+            Personales por DuckEMB en nombre de y bajo de instrucciones de la Compañía, las partes están bajo la obligación de
+            ingresar a un Acuerdo de Procesamiento de Datos por separado (DPA, por sus siglas en inglés, Data Processing Agreement).
+            <br>
+            <br>
+            18. DERECHOS DE AUDITORÍA
+            <br>
+            <br>
+            DuckEMB tendrá el derecho de auditar el cumplimiento de la Compañía con los requisitos bajo estos Términos o Contrato
+            aplicable ya sea por sí mismo o por un tercero obligado a confidencialidad, en cualquier momento después de notificación
+            anticipada durante trabajo regular, en sitio, y en manera que impacte el negocio operacional de la Compañía tan poco como sea
+            posible. Como parte de dicha auditoria, DuckEMB también puede revisar la documentación y reportes de la Compañía. La
+            Compañía deberá otorgar a DuckEMB el acceso a información, bases de datos y archivos de registro relevantes y similares para
+            este propósito y deberá permitir a DuckEMB o al tercero a monitorear el cumplimiento de estos Términos y / o el Contrato. La
+            Compañía deberá apoyar a DuckEMB o al tercero dentro de lo mejor de sus esfuerzos.
+            <br>
+            <br>
+            19. CONTROL DE EXPORTACIONES
+            <br>
+            <br>
+            19.1. Cada parte deberá cumplir con las Reglas de Sanción en relación a todos los asuntos conectados con o que surjan del
+            Contrato aplicable y está de acuerdo, entre las partes, que es enteramente responsable para asegurar su cumplimiento con
+            las Reglas de Sanción.
+
+            <br>
+            <br>
+            19.2. DuckEMB deberá obtener todas las autorizaciones necesarias y licencias requeridas para cumplir con las Reglas de
+            Sanción aplicables a la exportación de cualquier Licencia, Servicio y Entregable suministrado o vendido a la Compañía bajo
+            cualquier Contrato.
+            <br>
+            <br>
+            19.3. Ninguna de las partes deberá actuar o fallará en actuar de tal manera que pueda causar una violación a las Reglas de
+            Sanción a la otra parte.
+            <br>
+            <br>
+            20. ANTISOBORNO Y ANTICORRUPCIÓN
+            <br>
+            <br>
+            20.1. Las partes no deberán cometer, autorizar o permitir cualquier acción en conexión con la negociación, conclusión o
+            desempeño del Contrato que viole cualquier ley o reglamento aplicable de anticorrupción o antisoborno. Esta obligación
+            aplica en particular a pagos ilegítimos a oficiales del gobiernos, representantes de autoridades públicas o sus asociados,
+            familias o amigos cercanos.
+            <br>
+            <br>
+            20.2. Las partes no deberán ofrecer, o dar a cualquier empleado, representante o tercero actuando en nombre de la otra parte, o
+            aceptar, de cualquier empleado, representante o tercero actuando en nombre de la otra parte, cualquier regalo o beneficio
+            indebido, ya sea monetario o de otra forma, en relación a la negociación, conclusión o desempeño del Contrato.
+            <br>
+            <br>
+            20.3. Cada parte deberá notificar inmediatamente a la otra parte si se entera o sospecha de cualquier corrupción en relación a la
+            negociación, conclusión o desempeño del Contrato.
+            <br>
+            <br>
+            21. JURISDICCIÓN Y LEY GOBERNANTE
+            <br>
+            <br>
+            El Contrato y cualquier disputa o reclamo que surja de o en conexión con la misma o su sujeto material o formación (incluyendo
+            disputas o reclamos no contractuales) deberán ser gobernadas por e interpretadas en concordancia con las leyes del país / estado
+            en la cual este incorporada la entidad de DuckEMB que celebra este Contrato, a la exclusión de sus reglas sobre leyes de
+            conflictos. La Convención de las Naciones Unidas sobre Contratos para La Venta Internacional de bienes no aplicará al Contrato.
+            Cada parte irrevocablemente está de acuerdo que las cortes del país / estado en el cual esté incorporada la entidad de
+            DuckEMB que celebra el contrato tendrá la jurisdicción exclusiva para arreglar dichas disputas.
+            <br>
+            <br>
+            22. GENERAL
+            <br>
+            <br>
+            22.1. La invalidez o inaplicabilidad de cualquier disposición de estos Términos no afectará adversamente la validez o aplicabilidad
+            de las disposiciones restantes.
+            <br>
+            <br>
+            22.2. Todos los avisos y otras comunicaciones requeridas o permitidas a ser servidas deberán ser otorgadas por escrito.
+            <br>
+            <br>
+            22.3. El hecho de que DuckEMB no haga cumplir una disposición estos Términos no constituye una renuncia a la misma y de
+            ninguna manera afectará el derecho de imponer dicha disposición.
+            <br>
+            <br>
+            22.4. El uso de este software por parte de unos de los desarrolladores del mismo le otorga con el fin de exponer las cualidades, 
+            caracteristicas, atributos, ventajas, funcionalidades o similares de que los miembros de un tribunal de evaluación de instancias 
+            finales (ya sea correspondiente a una tesis, tesina, proyecto final, integrador, instancia evaluativa final integradora o similares) 
+            hagan uso del mismo para que puedan observar el codigo fuente, testear y evaluar lo realizado por el grupo de desarrollo.
+            <br>
+            <br>
+            22.5. Y en continuación al anterior inciso, los miembros de ese tribunal deberan juzgar y brindar opiniones constructivas, posibles mejoras 
+            que se puedan realizar a este producto, y cualquier feedback correspondiente para ser analizado y posteriormente agregado en una proxima actualización.
+            <br>
+            <br>
+            22.6. Una vez completado los incisos anteriores (de manera parcial o total, siendo no estrictamente necesario cumplirlos), se debera 
+            asegurar a los miembros del desarrollo del mismo (siendo su incumplimiento motivo suficiente de rescisión del uso y manipulación del producto de software, y posterior posible demanda legal) 
+            una nota no menor a la calificación maxima que se pueda obtener en el sistema educativo vigente del pais donde se evalue.
+            <br>
+            <br>
+            22.6. Cualquier encabezado, subtítulo o título del párrafo contenido en estos Términos se inserta solo de manera conveniente y
+            de ninguna manera define o explica el párrafo o disposición del mismo.
+            <br>
+            <br>
+            22.7. Nada en estos Términos o cualquier Contrato tiene la intención de, o deberá ser considerado que, establece una asociación
+            o proyecto conjunto entre cualquiera de las partes, que constituye a cualquier parte como agente de la otra parte, o que
+            autoriza a cualquier parte a hacer o celebrar cualquier compromiso por o en nombre de cualquier otra parte.
+            <br>
+            <br>
+            22.8. Estos Términos en conjunto con los Contratos, representan el acuerdo entero entre las partes en relación al tema presente,
+            y reemplaza a cualquier otro acuerdo y arreglo.
+        </div>
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,449 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+    <style>
+        .invoice-box {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .invoice-box.rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box.rtl table {
+            text-align: right;
+        }
+
+        .invoice-box.rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+    <title>Title</title>
+    <script>
+        function mostrar()
+        {
+            variable1 = document.getElementById("seccionPrincipal");
+            variable1.style.display="block";
+            variable2 = document.getElementById("multi");
+            variable2.style.display="none";
+        }
+    </script>
+
+    <script>
+        function ocultar()
+        {
+            variable1 = document.getElementById("multi");
+            variable1.style.display="block";
+            variable2 = document.getElementById("seccionPrincipal");
+            variable2.style.display="none";
+        }
+    </script>
+</head>
+
+<body>
+
+    <button class="boton_atras btn btn-secondary">
+        <a href="/pedidosArt/" style="color: white;">Volver Atras</a>
+    </button>
+    <p></p>
+    <button class="glow-on-hover me-2 mb-2"onclick="mostrar()">Ver en Listado</button>
+    <button class="glow-on-hover me-2 mb-2" onclick="ocultar()">Ver en Facturacion</button>
+
+    <div id="seccionPrincipal" style="display: none">
+        <p></p> <!-- Separador estetico provisional-->
+        <h2 class="mx-5">Pedidos</h2>
+        <section class="intro">
+            <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                        <table id="tablax" class="table table-striped mb-0">
+                                            <thead style="background-color: #002d72;">
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Cliente</th>
+                                                    <th scope="col">Fecha</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Metodo de Pago</th>
+                                                    <th scope="col">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for ped in pedido %}
+                                                    <tr>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ ped.id }}</a></h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ ped.idCliente }}</td></h5>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ ped.fecha}}</h5>
+                                                        </td>
+                                                        <td><h5>
+                                                            {% if ped.estado == 'PR' %}
+                                                                <img src="{% static '/Iconos/ico-en-proceso.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pedido en proceso" alt="editar ico" width="45px" class="ico-boton">
+                                                            {% elif ped.estado == 'AR' %}
+                                                                <img src="{% static '/Iconos/ico-armado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pedido armado" alt="editar ico" width="45px" class="ico-boton">
+                                                            {% elif ped.estado == 'EN' %}
+                                                                <img src="{% static '/Iconos/ico-en-entrega.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pedido en entrega" alt="editar ico" width="45px" class="ico-boton">
+                                                            {% elif ped.estado == 'DE' %}
+                                                                <img src="{% static '/Iconos/ico-despachado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pedido despachado" alt="editar ico" width="45px" class="ico-boton">
+                                                            {% elif ped.estado == 'CA' %}
+                                                                <img src="{% static '/Iconos/ico-cancelado.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Pedido cancelado" alt="editar ico" width="45px" class="ico-boton">
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <a href="/pedidoxpago/{{ ped.metodoPago_id }}/"><h5 class="mt-2"data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Visualizar por: {{ ped.metodoPago }}" alt="editar ico" width="45px" class="ico-boton">{{ ped.metodoPago }}</td></h5></a>
+                                                        <td>
+                                                            <a href="/modpedido/{{ ped.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Pedido" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                            <a href="/deletepedido/{{ ped.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Pedido" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                            <a href="/detailped/{{ ped.id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <p></p> <!-- Separador estetico provisional-->
+        <h2 class="mx-5">Listado de Articulos</h2>
+        <p></p>
+        
+        <section class="intro">
+            <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                        <table id="tablaprueba" class="table table-striped mb-0">
+                                            <thead style="background-color: #002d72;">
+                                                <tr>
+                                                    <th scope="col">Referencia</th>
+                                                    <th scope="col">Articulo</th>
+                                                    <th scope="col">Unidades</th>
+                                                    <th scope="col">Subtotal</th>
+                                                    <th scope="col">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for art in articulo %}
+                                                    <tr>
+                                                        <td>{{ art.idPedido }}</td>
+                                                        <td>
+                                                            <a href="/detailarticulo/{{ art.idArticulo_id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver detalle del Articulo" alt="detalles ico" width="22px" class="ico-boton">
+                                                            {{ art.idArticulo }}</a>
+                                                        </td>
+                                                        <td>{{ art.unidades }}</td>
+                                                        <td>{{ art.subtotal|floatformat:2 }}</td>
+                                                        <td>
+                                                            <a href="/modpedidoarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Pedido Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                            <a href="/deletepedidoarticulo/{{ art.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Pedido Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                            <a href="/detailpedart/{{ art.idPedido_id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="multi">
+        <div class="d-flex me-2 mb-2">
+            <div class="card">
+                <div class="card-body p-2">
+                    <h5 class="titulo-bloque me-4">
+                        Acciones:
+                    </h5>
+                    <button class="glow-on-hover" onclick="createPDF()">Imprimir</button>
+                </div>
+            </div>
+        </div>
+        <div id="contentas">
+            <div class="invoice-box">
+                <table cellpadding="0" cellspacing="0">
+                    <tr class="top">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td class="title">
+                                        <img img src="{% static '/Iconos/emb-logo.png' %}"/>
+                                    </td>
+    
+                                    <td>
+                                        {% for ped in pedido %}
+                                            Pedido #{{ ped.id }}<br />
+                                            Fecha: {{ ped.fecha }}<br />
+                                        {% endfor %}
+    
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+    
+                    <tr class="information">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td>
+                                        EMB Piscinas (Tel.: 03544 552871)<br />
+                                        RP14, Nono, Córdoba <br />
+                                        Nono, Cordoba
+                                    </td>
+    
+                                    <td>
+                                        {% for ped in pedido %}
+                                            Cliente: <br />
+                                            {{ ped.idCliente }}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+    
+                    <tr class="heading">
+                        <td>Producto</td>
+                        <td>Precio ($)</td>
+                    </tr>
+    
+                    {% for art in articulo %}
+                    <tr class="item">
+                        <td>{{ art.idArticulo }} - (Unidad/es: {{ art.unidades }})</td>
+                        <td>{{ art.subtotal|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr class="total">
+                        <td></td>
+                        <td>Total: $<a id="tdTotal"></a></td>
+                    </tr>
+    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createPDF() {
+            var pdf = document.getElementById("contentas");
+            var opt = {
+                margin: 0.6,
+                filename: 'EMB_Piscinas_-_Pedido.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(pdf).save();
+        }
+    </script>
+
+    <script>
+        window.addEventListener("load", function(){
+            sumatoriaArticulo();
+        })
+
+        function sumatoriaArticulo(){
+            let total = 0;
+            
+            const table = document.getElementById("tablaprueba");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[3].innerHTML;
+                total += parseFloat(rowValue);
+                console.log(total)
+            }
+            const tdTotal = document.getElementById("tdTotal");
+            tdTotal.textContent = total;
+
+            total = (total == null || total == undefined || total == "") ? 0 : total
+        }
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaprueba').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock %}

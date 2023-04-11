@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Empleados</title>
+</head>
+
+    <!-- Tabla Empleados -->
+    <div class="h-100 pb-5">
+        <div class="d-flex justify-content-between">
+            <h2 class="titulo-bloque">
+                Empleados Administrativos
+            </h2>
+            <button class="glow-on-hover" type="button">
+                <a href="/newempleado/" class="boton-link">Añadir Empleado</a>
+            </button>
+            <button class="glow-on-hover" type="button">
+                <a href="/empleadoAdministrativoPDF/" target="_blank" class="boton-link">Imprimir Listado</a>
+            </button>
+        </div>
+        <p></p>
+        <div class="d-flex">
+            <div class="card">
+                <div class="card-body p-2">
+                    <h5 class="titulo-bloque me-4">
+                        Filtrar por:
+                    </h5>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/" class="boton-link">Todos</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/obrero/" class="boton-link">Obrero</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/temporario/" class="boton-link">Temporario</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/gerencia/" class="boton-link">Gerencia</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/ventas/" class="boton-link">Ventas</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/empleados/logistica/" class="boton-link">Logistica</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablax" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr class="header-tabla">
+                                                <th scope="col">
+                                                    
+                                                </th>
+                                                <th scope="col">
+                                                    D.N.I.
+                                                </th>
+                                                <th scope="col">
+                                                    Nombre
+                                                </th>
+                                                <th scope="col">
+                                                    Teléfono
+                                                </th>
+                                                <th scope="col">
+                                                    Email
+                                                </th>
+                                                <th scope="col">
+                                                    Rol
+                                                </th>
+                                                <th scope="col">
+                                                    Dirección
+                                                </th>
+                                                <th scope="col">
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for emp in empleado %}
+                                            <!-- End Header Tabla -->
+                                            <tr class="body-tabla" style="border-bottom: none;">
+                                                <td class="py-3">
+                                                    <img src="{{ MEDIA_URL }}{{ emp.imagen }}" class="mx-5" width="80px">
+                                                </td>
+                                                <td>
+                                                    <h6 class="mt-3">{{ emp.dni }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mt-3">{{ emp.nombre }}</h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mt-3"><a href="tel:{{ emp.telefono }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Llamar al Cliente">{{ emp.telefono }}</a></h6>
+                                                </td>
+                                                <td>
+                                                    <h6 class="mt-3"><a href="mailto:{{ emp.email }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Enviar E-Mail al Empleado">{{ emp.email }}</a></h6>
+                                                </td>
+                                                <td>
+                                                    {% if emp.rol == 'AD' %}
+                                                        <img src="{% static '/Iconos/ico-administrativo.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Administrativo" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% elif emp.rol == 'OB' %}
+                                                        <img src="{% static '/Iconos/ico-obrero.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Obrero" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% elif emp.rol == 'TE' %}
+                                                        <img src="{% static '/Iconos/ico-temporario.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Temporario" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% elif emp.rol == 'GE' %}
+                                                        <img src="{% static '/Iconos/ico-gerencia.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Gerencia" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% elif emp.rol == 'VE' %}
+                                                        <img src="{% static '/Iconos/ico-ventas.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ventas" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% elif emp.rol == 'LO' %}
+                                                        <img src="{% static '/Iconos/ico-logistica.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Logistica" alt="editar ico" width="45px" class="mt-2 ico-boton">
+                                                    {% endif %}
+                                                </td>
+                                                {% for dir in direccion %}
+                                                    {% if dir.idEmpleado == emp %}
+                                                    <td>
+                                                        <a href="https://www.google.com.ar/maps/place/{{ dir.calle }},+X{{ dir.cp }},{{dir.ciudad}},{{dir.provincia}}/" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                                                            <img src="{% static '/Iconos/ico-maps.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ dir.calle }}, B° {{ dir.barrio }}, {{ dir.ciudad }} ({{ dir.cp }}), {{ dir.provincia }}" alt="eliminar ico" width="30px" class="ico-boton mt-2">
+                                                        </a>
+                                                    </td>
+                                                        <td>
+                                                            <a href="/modempleado/{{ dir.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Empleado" alt="editar ico" width="30px" class="mt-2 ico-boton"></a>
+                                                            <a href="/deleteempleado/{{ emp.dni }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Empleado" alt="eliminar ico" width="30px" class="ico-boton mt-2"></a>
+                                                            <a href="/cajaxempleado/{{ emp.dni }}/"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver las Cajas vinculadas" alt="cajaxempleado ico" width="30px" class="ico-boton mt-2"></a>
+                                                        </td>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

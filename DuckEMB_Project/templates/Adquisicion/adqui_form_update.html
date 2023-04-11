@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <title>DuckEMB v.0.4.13</title>
+    <style>
+        .boton_atras {
+            margin-bottom: 8px;
+            margin-left: 14px;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 5px;
+        }
+
+        .helptext {
+            display: none;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        label {
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+
+        .card-container {
+            background-image: linear-gradient(to right bottom, #d1d1d1, #ceced0, #ccccce, #c9c9cd, #c7c6cb);
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 2px;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 25px;
+        }
+
+        .text-info {
+            text-align: center;
+        }
+
+        .derecha {
+            float: right;
+        }
+
+        #id_fechaEntrega {
+            width: 100%;
+        }
+
+        #id_fechaRecibido {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="boton_atras btn btn-secondary">
+        <a href="/adquisiciones/" style="color: white;">Volver Atras</a>
+    </button>
+    <div class="container mt-4">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="card">
+                <div class="card-header">
+                    <h4>Adquisiciones</h4>
+                </div>
+                <div class="card-body">
+                    {{ form.management_form }}
+                    {{ form.non_form_errors }}
+                    {{ form.as_p }}
+                </div>
+            </div>
+            <p></p>
+
+            <div class="item_ingreso">
+                <h5 class="text-info">Articulos</h5>
+                {{ Articulos.management_form }}
+                {{ Articulos.non_form_errors }}
+            </div>
+
+            <p></p>
+
+            <div class="row" style="padding-left: 20px;">
+                {% for f1 in Articulos %}
+                <div style="width: 370px;">
+                    <div class="card-container">
+                        <main class="main-content">
+                            {{ f1.as_p }}
+                        </main>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <p></p>
+
+            <div class="item_ingreso">
+                <h5 class="text-info">Piscinas</h5>
+                {{ Piscinas.management_form }}
+                {{ Piscinas.non_form_errors }}
+            </div>
+
+            <p></p>
+
+            <div class="row" style="padding-left: 20px;">
+                {% for f2 in Piscinas %}
+                <div style="width: 370px;">
+                    <div class="card-container">
+                        <main class="main-content">
+                            {{ f2.as_p }}
+                        </main>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <p></p>
+
+            <div class="mt-3 mb-5">
+                <button type="submit" class="px-5 btn btn-info derecha">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

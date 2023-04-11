@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'graficos.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="d-flex justify-content-between">
+    <h4 class="mx-5 mt-2">Mostrar grafico de:</h2>
+    <button class="glow-on-hover" type="button">
+      <a href="/graficos/" class="boton-link">Precio - Piscinas</a>
+    </button>
+    <button class="glow-on-hover" type="button">
+      <a href="/graficos2/" class="boton-link">Stock - Piscina</a>
+    </button>
+    <button class="glow-on-hover" type="button">
+      <a href="/graficos3/" class="boton-link">Stock - Articulos</a>
+    </button>
+    <button class="glow-on-hover" type="button">
+      <a href="/graficos4/" class="boton-link">Roles - Usuarios</a>
+    </button>
+  </div>
+  <p></p> <!-- Separador estetico provisional-->
+  <h2 class="mx-5">Grafico de Roles (Empleados)</h2>
+  
+  <div class="grafico2">
+    <canvas id="myChart"></canvas>
+  </div>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Administrativo', 'Obrero', 'Temporario', 'Gerencia', 'Ventas', 'Logistica'],
+            datasets: [{
+              label: 'Número de Personas',
+              data: ['{{data_ad}}', '{{data_ob}}', '{{data_te}}', '{{data_ge}}', '{{data_ve}}', '{{data_lo}}'],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

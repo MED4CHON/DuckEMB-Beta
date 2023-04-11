@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    
+    <title>Title</title>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="h-100 pb-5">
+        <div class="d-flex justify-content-between">
+            <h2 class="titulo-bloque">
+                Piscinas en Pedidos
+            </h2>
+            <button class="glow-on-hover" type="button">
+                <a href="/newpedidopiscina/" class="boton-link">Añadir Pedido (Solo Piscinas)</a>
+            </button>
+            <button class="glow-on-hover" type="button">
+                <a href="/pedido_PiscinaPDF/" target="_blank" class="boton-link">Imprimir Listado</a>
+            </button>
+        </div>
+        <p></p>
+        <div class="d-flex">
+            <div class="card">
+                <div class="card-body p-2">
+                    <h5 class="titulo-bloque me-4">
+                        Visualizar por:
+                    </h5>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/pedidos/" class="boton-link">General</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/histpedidos/" class="boton-link">Historico</a>
+                    </button>
+                    <button class="glow-on-hover me-2" type="button">
+                        <a href="/pedidosArt/" class="boton-link">Articulos</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <p></p>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablax2" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr>
+                                                <th scope="col">Referencia</th>
+                                                <th scope="col">Piscina</th>
+                                                <th scope="col">Unidades</th>
+                                                <th scope="col">Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for pisc in piscinas %}
+                                                <tr>
+                                                    <td><h5 class="mt-2">{{ pisc.idPedido }}</h5></td>
+                                                    <td>
+                                                        <h5 class="mt-2">
+                                                            <a href="/detailpiscina/{{ pisc.idPiscina_id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver detalle de la Piscina" alt="detalles ico" width="22px" class="ico-boton">
+                                                                {{ pisc.idPiscina }}</a>
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5 class="mt-2">{{ pisc.unidades }}</h5></td>
+                                                    <td>
+                                                        <a href="/modpedidopiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Pedido Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/deletepedidopiscina/{{ pisc.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Pedido Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/detailpedpisc/{{ pisc.idPedido_id }}"><img src="{% static '/Iconos/ico-detalles.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Ver Detalle" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax2').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

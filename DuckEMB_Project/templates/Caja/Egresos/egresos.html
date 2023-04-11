@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'cards-date.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="h-100 pb-1">
+        <div class="d-flex justify-content-between">
+            <h2 class="titulo-bloque">
+                Egresos
+            </h2>
+            <button class="glow-on-hover" type="button">
+                <a href="/newegreso/" class="boton-link">Añadir Egresos</a>
+            </button>
+            <button class="glow-on-hover" type="button">
+                <a href="/egresosPDF/" target="_blank" class="boton-link">Imprimir Listado</a>
+            </button>
+        </div>
+    </div>
+    <div class="d-flex mt-3">
+        <div class="card me-4 mb-2">
+            <div class="card-body p-2">
+                <h5 class="titulo-bloque me-4">
+                    Visualizar por:
+                </h5>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/caja/" class="boton-link">Caja</a>
+                </button>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/histcaja/" class="boton-link">Historico</a>
+                </button>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/ingresos/" class="boton-link">Ingresos</a>
+                </button>
+            </div>
+        </div>
+        <div class="card me-4 mb-2">
+            <div class="card-body p-2">
+                <h5 class="titulo-bloque me-4">
+                    Filtrar por:
+                </h5>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/egresos/pagado" class="boton-link">Pagos</a>
+                </button>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/egresos/impago" class="boton-link">Impagos</a>
+                </button>
+                <button class="glow-on-hover me-2" type="button">
+                    <a href="/egresos/en_tramite" class="boton-link">En Tramite</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="ag-format-container">
+        <div class="ag-courses_box">
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+        
+                <div class="ag-courses-item_title">
+                    <b>$ <b id="tdTotal"></b></b>
+                </div>
+        
+                <div class="ag-courses-item_date-box">
+                    <span class="ag-courses-item_date">
+                        Egresos - Pagos
+                    </span>
+                </div>
+                </a>
+            </div>
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+        
+                <div class="ag-courses-item_title">
+                    <b>$ <b id="tdTotal2"></b></b>
+                </div>
+        
+                <div class="ag-courses-item_date-box">
+                    <span class="ag-courses-item_date">
+                        Egresos - Impagos
+                    </span>
+                </div>
+                </a>
+            </div>
+
+            <div class="ag-courses_item">
+                <a class="ag-courses-item_link">
+                <div class="ag-courses-item_bg"></div>
+        
+                <div class="ag-courses-item_title">
+                    <b>$ <b id="tdTotal3"></b></b>
+                </div>
+        
+                <div class="ag-courses-item_date-box">
+                    <span class="ag-courses-item_date">
+                        Egresos - Pendientes
+                    </span>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section class="intro">
+        <div class="bg-image h-100" style="background-color: #f5f7fa;">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                    <table id="tablaprueba" class="table table-striped mb-0">
+                                        <thead style="background-color: #002d72;">
+                                            <tr>
+                                                <th>Caja</th>
+                                                <th>Valor ($)</th>
+                                                <th>Metodo de Pago</th>
+                                                <th>Adquisición</th>
+                                                <th>Condicion</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        {% for eg in egresos %}
+                                            <tr>
+                                                <td>{{ eg.idCaja}}</td>
+                                                <td>{{ eg.valor }}</td>
+                                                <td>{{ eg.metodoPago }}</td>
+                                                <td>
+                                                    <a href="/detailadqart/{{ eg.idAdquisicion_id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Redirigirse a la Adquisición" alt="detalles ico" width="22px" class="ico-boton">
+                                                    {{ eg.idAdquisicion }}</a>
+                                                </td>
+                                                <td>{{ eg.condicion }}</td>
+                                                <td>
+                                                    <a href="/modegreso_object/{{ eg.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Egreso" alt="editar ico" width="30px" class="me-3 ico-boton"></a>
+                                                    <a href="/deleteegreso/{{ eg.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Egreso" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.addEventListener("load", function(){
+            sumPago();
+            sumImpago();
+            sumPendiente();
+        })
+
+        function sumPago(){
+            let total = 0;
+            const table = document.getElementById("tablaprueba");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[1].innerHTML;
+                let rowValue2 = table.rows[i].cells[4].innerHTML;
+                if (rowValue2 == "IM") {
+                    rowValue = 0
+                }
+                else if (rowValue2 == "TR") {
+                    rowValue = 0
+                }
+                total = total + Number(rowValue);
+            }
+            const tdTotal = document.getElementById("tdTotal");
+            tdTotal.textContent = total;
+        }
+
+        function sumImpago(){
+            let total = 0;
+            const table = document.getElementById("tablaprueba");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[1].innerHTML;
+                let rowValue2 = table.rows[i].cells[4].innerHTML;
+                if (rowValue2 == "PA") {
+                    rowValue = 0
+                }
+                else if (rowValue2 == "TR") {
+                    rowValue = 0
+                }
+                total = total + Number(rowValue);
+            }
+            const tdTotal = document.getElementById("tdTotal2");
+            tdTotal.textContent = total;
+        }
+
+        function sumPendiente(){
+            let total = 0;
+            const table = document.getElementById("tablaprueba");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[1].innerHTML;
+                let rowValue2 = table.rows[i].cells[4].innerHTML;
+                if (rowValue2 == "IM") {
+                    rowValue = 0
+                }
+                else if (rowValue2 == "PA") {
+                    rowValue = 0
+                }
+                total = total + Number(rowValue);
+            }
+            const tdTotal = document.getElementById("tdTotal3");
+            tdTotal.textContent = total;
+        }
+
+    </script>
+
+        <!-- DATATABLES -->
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#tablaprueba').DataTable({
+                    responsive: true,
+                    autowidth: false,
+                    language: {
+                        processing: "Tratamiento en curso...",
+                        search: "Buscar&nbsp;:",
+                        lengthMenu: "Agrupar de _MENU_ items",
+                        info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                        infoEmpty: "No existen datos.",
+                        infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                        infoPostFix: "",
+                        loadingRecords: "Cargando...",
+                        zeroRecords: "No se encontraron datos con tu busqueda",
+                        emptyTable: "No hay datos disponibles en la tabla.",
+                        paginate: {
+                            first: "Primero",
+                            previous: "Anterior",
+                            next: "Siguiente",
+                            last: "Ultimo"
+                        },
+                        aria: {
+                            sortAscending: ": active para ordenar la columna en orden ascendente",
+                            sortDescending: ": active para ordenar la columna en orden descendente"
+                        }
+                    },
+                    lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+                });
+            });
+        </script>
+
+</body>
+</html>
+
+{% endblock %}

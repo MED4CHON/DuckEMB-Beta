@@ -1,0 +1,14 @@
+#order_derecha {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.imagen-detail {
+    width: 98%;
+    height: 98%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 20px;
+    
+}

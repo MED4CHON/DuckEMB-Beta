@@ -1,0 +1,65 @@
+{% load static%}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'register.css' %}">
+    <title>DuckEMB v.0.4.13</title>
+    <style>
+        .errorlist {
+            color: white;
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #dc3546b9;
+            border-width: 1px;
+            border-style: solid;
+            border-color: brown;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .alert-success {
+            display: none;
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 15px;
+            background-color: #82E25F;
+            border-width: 1px;
+            border-style: solid;
+            border-color: green;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg_animate">
+        <div class="container">
+            <h1 id="titulo">Registro</h1>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="boton" type="submit" name="Create User" value="Registrarse">
+                <p>Al registrarse usted acepta los <a href="/terminos/">Terminos y Condiciones del Servicio</a></p>
+            </form>
+        </div>
+        <div class="burbujas">
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+            <div class="burbuja"></div>
+        </div>
+    </header>
+
+</body>
+</html>
+
+
+

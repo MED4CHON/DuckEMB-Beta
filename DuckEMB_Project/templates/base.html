@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="{% static 'index3.css' %}">
+    <link rel="stylesheet" href="{% static 'menu.css' %}">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="{% static '/js/tooltip.js' %}"></script>
+
+    <style>
+        .obj-fijo {
+            position: fixed;
+            width: 280px;
+        }
+
+        .home-fijo {
+            padding-left: 280px;
+        }
+    </style>
+
+    <title>EMB Piscinas - Dashboard</title>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar obj-fijo">
+        <div class="d-flex flex-column align-items-center p-4">
+            <div class="d-flex flex-column align-items-center" style="width: 80%;">
+                <img class="mb-4" src="{% static '/Iconos/emb-logo.png' %}" width="50px" alt="">
+                {% if user.is_authenticated %}
+                    <h1 class="text-center nombre-usuario">Usuario: {{user.username}} <br> {{user.first_name}} {{user.last_name}}</h1>
+                    <h6 class="text-center mail-usuario">{{user.email}}</h5>
+                {% endif %}
+                <div class="d-flex flex-column flex-shrink-0 align-items-center">
+                    <hr>
+                    <div class="" >
+                        <ul id="nav" class="nav nav-pills flex-column">
+                            <li class=" nav-item {% if request.path == '/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                <img class="icon-menu {% if request.path == '/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-inicio-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                <a href="/" class="nav-link {% if request.path == '/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Home</a>
+                            </li>
+                            {% if user.is_staff %}
+                                <li class=" nav-item {% if request.path == '/categorias/'%}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/categorias/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-categorias-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/categorias" class="nav-link {% if request.path == '/categorias/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Categorias</a>
+                                </li>
+                                <li class=" nav-item {% if request.path == '/clientes/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/clientes/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-clientes-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/clientes" class="nav-link {% if request.path == '/clientes/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Clientes</a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li class=" nav-item {% if request.path == '/proveedores/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/proveedores/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-proveedores-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/proveedores" class="nav-link {% if request.path == '/proveedores/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Proveedores</a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li class=" nav-item {% if request.path == '/empleados/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/empleados/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-empleados-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/empleados" class="nav-link {% if request.path == '/empleados/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Empleados</a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                                <li class="my-2 nav-item {% if request.path == '/obras/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/obras/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-obras-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a id="enlace" href="/obras" class="nav-link {% if request.path == '/obras/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Obras</a>
+                                </li>
+                            {% endif %}
+                            <li class=" nav-item {% if request.path == '/piscinas/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                <img class="icon-menu {% if request.path == '/piscinas/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-piscinas-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                <a href="/piscinas" class="nav-link {% if request.path == '/piscinas/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Piscinas</a>
+                            </li>
+                            <li class=" nav-item {% if request.path == '/articulos/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                <img class="icon-menu {% if request.path == '/articulos/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-articulos-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                <a href="/articulos" class="nav-link {% if request.path == '/articulos/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Artículos</a>
+                            </li>
+                            {% if user.is_staff %}
+                                <li class=" nav-item {% if request.path == '/adquisiciones/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/adquisiciones/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-informes-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/adquisiciones" class="nav-link {% if request.path == '/adquisiciones/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Adquisiciones</a>
+                                </li>
+                                <li class=" nav-item {% if request.path == '/pedidos/' or request.path == '/detailped/1/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/pedidos/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-pedidos-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/pedidos" class="nav-link {% if request.path == '/pedidos/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Pedidos</a>
+                                </li>
+                            {% endif %}
+                            {% if user.is_superuser %}
+                                <li class=" nav-item {% if request.path == '/caja/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/caja/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-caja-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/caja" class="nav-link {% if request.path == '/caja/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Caja</a>
+                                </li>
+                                <li class=" nav-item {% if request.path == '/graficos/' or request.path == '/graficos2/' or request.path == '/graficos3/' or request.path == '/grafico4/' or request.path == '/grafico5/' %}boton-activo-sidebar{% else %}boton-inactivo-sidebar{% endif %} d-flex align-items-center ps-30 rounded-pill boton-nav">
+                                    <img class="icon-menu {% if request.path == '/graficos/' %}ico-blanco{% endif %}" src="{% static '/Iconos/ico-informes-gris.png' %}" width="auto" height="18px" alt="Inicio">
+                                    <a href="/graficos" class="nav-link {% if request.path == '/graficos/' or request.path == '/graficos2/' or request.path == '/graficos3/' or request.path == '/grafico4/' or request.path == '/grafico5/' %}text-white{% else %}text-gris{% endif %} enlace-nav">Graficos</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Sidebar -->
+
+
+    <!-- Bloque Central -->
+    <div class=" home-fijo w-100 h-100">
+
+        <!-- Header -->
+        <header class="d-flex align-items-center">
+            <div class=" info-pagina d-flex align-items-center col-10">
+                <h5 class="dia fw-bold m-3">{{ formato }}</h5>
+                <!-- <div class="circulo"></div> -->
+            </div>
+            <div class="col-md-auto">
+            </div>
+            {% if user.is_authenticated %}
+
+                <!-- start nav -->
+                <nav id="menu">
+                    <!-- start menu -->
+                    <ul>
+                        <li class="icon_titile"><a class="user_sesion" href="#"><img class="user_logo" src="{% static '/Iconos/ico-usuario.png' %}" alt=""> {{user.username}}</a>
+                    <!-- start menu desplegable -->
+                    <ul>
+                        <li><a href="/change-password" target="_blank">Cambiar Contraseña</a></li>
+                        {% if user.is_superuser %}
+                            <li><a href="https://drive.google.com/drive/folders/1bTbYp9bOULH4-wuvgaC4aCwyT77G1lg8?usp=sharing" target="_blank">Documentación</a></li>
+                        {% endif %}
+                        <li><a href="/terminos" target="_blank">Terminos y Condiciones</a></li>
+                        <li><a href="/logout">Cerrar Sesión</a></li>
+                    </ul>
+                    <!-- end menu desplegable -->
+                    </li>
+                    </ul>
+                    <!-- end menu -->
+                </nav>
+                <!-- end nav -->
+            {% else %}
+                <a class="nav-item nav-link" href="/login/">
+                    <div class="d-flex flex-column align-items-center">
+                        <button class="btn align-items-center justify-content-center" type="button"><img class="pe-8" src="{% static '/Iconos/ico-usuario.png' %}" width="auto" height="18px" alt=""></button>
+                    </div>
+                </a>
+            {% endif %}
+        </header>
+        <!-- End header -->
+
+    <!-- Bloque Principal -->
+    <div class="p-4 bloque-principal">
+        <div></div>
+
+    {% block content %}
+    {% endblock %}
+    
+    
+
+    </div>
+    <!-- End Bloque Principal -->
+    </div>
+    <!-- End Bloque central -->
+
+
+    <!-- <script> 
+        $(document).ready(function () {
+            $(function(){
+                var current = location.pathname;
+                alert(current);
+                $('#nav li a').each(function(){
+                    var $this = $(this);
+                    if($this.attr('href').indexOf(current) !== -1){
+                        $this.addClass('boton-activo-sidebar');
+                    }
+                })
+            })
+        });
+    </script> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+
+</html>

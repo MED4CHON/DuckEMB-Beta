@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'error_500.css' %}">
+    <title>DuckEMB v.0.4.13</title>
+</head>
+<body>
+    <div id="hand_error">
+		<div class="hand_error-bg">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		<div class="hand_error">
+			<div class="hand_error-EMB">
+				<h1>500</h1>
+			</div>
+			<h2>Internal Server Error</h2>
+			<p>Ha sucedido un error interno dentro del servidor. Comuniquese con soporte técnico y aguarde mientras se intenta solucionar el problema.</p>
+			<a href="/">Volver a la Página Principal</a>
+		</div>
+	</div>
+</body>
+</html>

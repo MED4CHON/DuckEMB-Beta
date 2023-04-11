@@ -1,0 +1,429 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'categoria.css' %}">
+    <link rel="stylesheet" href="{% static 'table_form.css' %}">
+    <link rel="stylesheet" href="{% static 'button_personalized.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <style>
+        .invoice-box {
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
+
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
+
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .invoice-box.rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .invoice-box.rtl table {
+            text-align: right;
+        }
+
+        .invoice-box.rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+    <title>Title</title>
+    <script>
+        function mostrar()
+        {
+            variable1 = document.getElementById("seccionPrincipal");
+            variable1.style.display="block";
+            variable2 = document.getElementById("multi");
+            variable2.style.display="none";
+        }
+    </script>
+
+    <script>
+        function ocultar()
+        {
+            variable1 = document.getElementById("multi");
+            variable1.style.display="block";
+            variable2 = document.getElementById("seccionPrincipal");
+            variable2.style.display="none";
+        }
+    </script>
+</head>
+
+<body>
+    <button class="boton_atras btn btn-secondary">
+        <a href="/adquisicionesPisc/" style="color: white;">Volver Atras</a>
+    </button>
+    <p></p>
+    <button class="glow-on-hover me-2 mb-2"onclick="mostrar()">Ver en Listado</button>
+    <button class="glow-on-hover me-2 mb-2" onclick="ocultar()">Ver en Facturacion</button>
+
+    <div id="seccionPrincipal" style="display: none">
+        <section class="intro">
+            <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                        <table id="tablax" class="table table-striped mb-0">
+                                            <thead style="background-color: #002d72;">
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Proveedor</th>
+                                                    <th scope="col">Fecha de Entrega</th>
+                                                    <th scope="col">Fecha Recibida</th>
+                                                    <th scope="col">Estado</th>
+                                                    <th scope="col">Metodo de Pago</th>
+                                                    <th scope="col">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for adq in adqui %}
+                                                    <tr>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.id }}</a></h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.idProveedor }}</td></h5>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.fechaEntrega }}</h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.fechaRecibido }}</h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.estado }}</td></h5>
+                                                        <td>
+                                                            <h5 class="mt-2">{{ adq.metodoPago }}</td></h5>
+                                                        <td>
+                                                            <a href="/modadquisicion/{{ adq.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                            <a href="/deleteadquisicion/{{ adq.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                            </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <p></p> <!-- Separador estetico provisional-->
+        <h2 class="mx-5">Listado de Piscinas</h2>
+        <p></p>
+        <section class="intro">
+            <div class="bg-image h-100" style="background-color: #f5f7fa;">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true" style="position: relative">
+                                        <table id="tablaprueba2" class="table table-hover dimension">
+                                            <thead style="background-color: #002d72;">
+                                                <tr>
+                                                    <th>Piscina</th>
+                                                    <th>Unidades</th>
+                                                    <th>Subtotal</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for pi in piscina %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="/detailpiscina/{{ pi.idPiscina_id }}">{{ pi.idPiscina }}</a>
+                                                    </td>
+                                                    <td>{{ pi.unidades }}</td>
+
+                                                    <td>{{ pi.subtotal|floatformat:2 }}</td>
+                                                    <td>
+                                                        <a href="/modadqarticulo/{{ pi.id }}/"><img src="{% static '/Iconos/ico-editar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Modificar Adquisición Artículo" alt="editar ico" width="30px" class="ico-boton"></a>
+                                                        <a href="/deleteadqarticulo/{{ pi.id }}/"><img src="{% static '/Iconos/ico-eliminar.png' %}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Eliminar Adquisición Artículo" alt="eliminar ico" width="30px" class="ico-boton"></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <div id="multi">
+        <div class="d-flex me-2 mb-2">
+            <div class="card">
+                <div class="card-body p-2">
+                    <h5 class="titulo-bloque me-4">
+                        Acciones:
+                    </h5>
+                    <button class="glow-on-hover" onclick="createPDF()">Imprimir</button>
+                </div>
+            </div>
+        </div>
+        <div id="contentas">
+            <div class="invoice-box">
+                <table cellpadding="0" cellspacing="0">
+                    <tr class="top">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td class="title">
+                                        <img img src="{% static '/Iconos/emb-logo.png' %}"/>
+                                    </td>
+                                    <td>
+                                        {% for adq in adqui %}
+                                            Pedido #{{ adq.id }}<br />
+                                            Fecha de Entrega: {{ adq.fechaEntrega }}<br />
+                                            Fecha de Recibo: {{ adq.fechaRecibido }}<br />
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+    
+                    <tr class="information">
+                        <td colspan="2">
+                            <table>
+                                <tr>
+                                    <td>
+                                        EMB Piscinas (Tel.: 03544 552871)<br />
+                                        RP14, Nono, Córdoba <br />
+                                        Nono, Cordoba
+                                    </td>
+    
+                                    <td>
+                                        {% for adq in adqui %}
+                                            Proveedor: <br />
+                                            {{ adq.idProveedor }}
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+    
+                    <tr class="heading">
+                        <td>Piscina</td>
+                        <td>Precio ($)</td>
+                    </tr>
+    
+                    {% for pi in piscina %}
+                    <tr class="item">
+                        <td>{{ pi.idPiscina }} - (Unidad/es: {{ pi.unidades }})</td>
+                        <td>{{ pi.subtotal|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+    
+                    <tr>
+                        <td></td>
+                        <td></td>
+                    </tr>
+    
+                    <tr class="total">
+                        <td></td>
+                        <td>Total: $<a id="tdTotal2"></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function createPDF() {
+            var pdf = document.getElementById("contentas");
+            var opt = {
+                margin: 0.6,
+                filename: 'EMB_Piscinas_-_Adquisicion.pdf',
+                image: { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(pdf).save();
+        }
+    </script>
+
+    <script>
+        window.addEventListener("load", function(){
+            sumatoriaPiscina();
+        })
+
+
+        function sumatoriaPiscina(){
+            let total = 0;
+            
+            const table = document.getElementById("tablaprueba2");
+            for ( let i = 1; i < table.rows.length; i++){
+                let rowValue = table.rows[i].cells[2].innerHTML;
+                total += parseFloat(rowValue);
+                console.log(total)
+            }
+            const tdTotal2 = document.getElementById("tdTotal2");
+            tdTotal2.textContent = total;
+
+            total = (total == null || total == undefined || total == "") ? 0 : total
+        }
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+    <!-- DATATABLES -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#tablaprueba2').DataTable({
+                responsive: true,
+                autowidth: false,
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                lengthMenu: [ [5, 10, 15, 25, -1], [5, 10, 15, 25, "Todo"] ],
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+{% endblock %}
